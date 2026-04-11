@@ -10,16 +10,16 @@ Hunting Search	HS	2010	1	11	Oftadeh R.	Mahjoob M. J.	Shariatpanahi M.	 	 	 	 	 	
 Bat Algorithm	BA	2010	1	11	Yang X-S.	 	 	 	 	 	 	 	 	2	Nature Inspired Cooperative Strategies for Optimization (NICSO 2010)	1	2	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	4
 Cockroach Swarm Optimization	CSO	2010	1	11	ZhaoHui C.	HaiYan T.	 	 	 	 	 	 	 	2	2010 2nd International Conference on Computer Engineering and Technology	3	2	0	 	 	 	1	0	0	0	0	3	3	0	0	0	0	3	3	0	0	1	1	0	0	4	1
 Eurygaster Algorithm	EA	2012	1	11	Ahmadi F.	Salehi H.	Karimi K.	 	 	 	 	 	 	1	International Journal of Computer Applications	25	1	24	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Blind,naked Mole-rat Algorithm	BNMR	2012	1	11	Taherdangkoo M.	Shirzadi M. H.	Bagheri M. H.	 	 	 	 	 	 	1	Scientific Research and Essays	21	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Blind naked Mole-rat Algorithm	BNMR	2012	1	11	Taherdangkoo M.	Shirzadi M. H.	Bagheri M. H.	 	 	 	 	 	 	1	Scientific Research and Essays	21	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 OptBees	 	2012	1	11	Maia R. D.	de Castro L. N.	Camhnhas W. M.	 	 	 	 	 	 	2	2012 IEEE Congress on Evolutionary Computation	3	2	0	 	 	 	 	0	0	0	0	2	1	0	0	0	0	2	1	3	1	0	0	0	0	5	1
 Wolf Search	WS	2012	1	11	Tang R.	Fong S.	Yang X-S.	Deb S.	 	 	 	 	 	2	7th International Conference on Digital Information Management (ICDIM 2012)	3	2	0	 	 	 	 	0	0	0	0	0	0	2	2	0	0	2	2	3	1	2	1	0	0	7	1
 African Wild Dog Algorithm	AWDA	2013	1	11	Subramanian C.	Sekar A.S.S.	Subramanian K.	 	 	 	 	 	 	1	International Journal of Soft Computing	37	1	1	 	 	 	 	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1
 Seven-spot Ladybird Optimization	SLO	2013	1	11	Wang P.	Zhu Z.	Huang S.	 	 	 	 	 	 	1	The Scientific World Journal	6	2	0	 	 	 	 	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	1	1
-Penguins Search Optimization Algorithm	PSOA	2013	1	11	Gheraibia Y.	Moussaoui A.	 	 	 	 	 	 	 	2	International Conference on Industrial, Engineering and Other Applications of Ap	1	2	0	 	 	 	 	0	0	0	0	3	1	1	1	0	0	4	2	2	2	0	0	0	0	6	1
+Penguins Search Optimization Algorithm	PSOA	2013	1	11	Gheraibia Y.	Moussaoui A.	 	 	 	 	 	 	 	2	International Conference on Industrial Engineering and Other Applications of Ap	1	2	0	 	 	 	 	0	0	0	0	3	1	1	1	0	0	4	2	2	2	0	0	0	0	6	1
 Grey Wolf Optimizer	GWO	2014	1	11	Mirjalili S.	Mirjalili S. M.	Lewis A.	 	 	 	 	 	 	1	Advances in Engineering Software	2	1	0	1	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	3
 Chicken Swarm Optimization	CSO	2014	1	11	Meng X.	Liu Y.	Gao X.	Zhang H.	 	 	 	 	 	2	International Conference in Swarm Intelligence	1	1	0	1	 	 	 	0	0	0	0	2	1	8	4	2	1	12	6	5	1	5	3	0	0	22	1
 Cockroach Swarm Evolution	CSE	2015	1	11	Wu S-J.	Wu C-T.	 	 	 	 	 	 	 	1	Expert Systems with Applications	2	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Butterfly Optimization Algorithm	BOA	2015	1	11	Arora S.	Singh S.	 	 	 	 	 	 	 	2	2015 International Conference on Signal Processing, Computing and Control (ISPCC)	3	2	0	 	 	 	 	1	1	0	0	1	1	0	0	0	0	2	2	1	1	0	0	0	0	3	1
+Butterfly Optimization Algorithm	BOA	2015	1	11	Arora S.	Singh S.	 	 	 	 	 	 	 	2	2015 International Conference on Signal Processing Computing and Control (ISPCC)	3	2	0	 	 	 	 	1	1	0	0	1	1	0	0	0	0	2	2	1	1	0	0	0	0	3	1
 Whale Optimization Algorithm	WOA	2016	1	11	Mirjalili S.	Lewis A.	 	 	 	 	 	 	 	1	Advances in Engineering Software	2	1	0	1	 	 	 	37	30	0	0	35	26	98	69	6	5	176	130	26	22	30	19	0	0	232	5
 Bird Swarm Algorithm	BSA	2016	1	11	Meng X-B.	Gao X. Z.	Lu L.	Liu Y.	Zhang H.	 	 	 	 	1	Journal of Experimental & Theoretical Artificial Intelligence	9	2	0	 	 	 	 	2	1	0	0	1	1	6	2	0	0	9	4	3	3	4	1	0	0	16	1
 Dolphin Swarm Optimization Algorithm	DSOA	2016	1	11	Yong W.	Tao W.	Cheng-Zhi Z.	Hua-Juan H.	 	 	 	 	 	1	International Journal of Computational Intelligence and Applications	12	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
@@ -62,9 +62,9 @@ Black Widow Optimization	BWO	2020	1	12	Hayyolalam V.	Kazem A. A. P.	 	 	 	 	 	 	
 Black Widow Optimization Algorithm	BWO	2020	1	12	Hayyolalam V.	Kazem A. A. P.	 	 	 	 	 	 	 	1	Engineering Applications of Artificial Intelligence	2	1	0	1	 	 	 	1	1	0	0	0	0	0	0	0	0	1	1	1	1	0	0	0	0	2	1
 Stochastic Diffusion Search	SDS	1989	1	13	Bishop J. M.	 	 	 	 	 	 	 	 	2	1989 First IEE International Conference on Artificial Neural Networks	3	1	50	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	1	 	5
 Particle Swarm Optimization	PSO	1995	1	13	Eberhart R. C.	Kennedy J.	 	 	 	 	 	 	 	2	4th IEEE International Conference on Neural Networks	3	1	16	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	1	 	5
-Sheep Flocks Heredity Model Algorithm	SFHM	2001	1	13	Kim H.	Ahn B.	 	 	 	 	 	 	 	2	2001 IEEE Pacific Rim Conference on Communications, Computers and Signal Processing	3	 	 	 	 	 	 	1	1	0	0	7	6	0	0	0	0	8	7	0	0	1	1	0	0	9	1
+Sheep Flocks Heredity Model Algorithm	SFHM	2001	1	13	Kim H.	Ahn B.	 	 	 	 	 	 	 	2	2001 IEEE Pacific Rim Conference on Communications Computers and Signal Processing	3	 	 	 	 	 	 	1	1	0	0	7	6	0	0	0	0	8	7	0	0	1	1	0	0	9	1
 Bacterial Swarming Algorithm	BSA	2007	1	13	Tang W. J.	Wu Q. H.	Saunders J. R.	 	 	 	 	 	 	2	2007 IEEE Congress on Evolutionary Computation	3	2	0	 	 	 	 	1	0	0	0	0	0	4	1	0	0	5	1	0	0	1	1	0	0	6	1
-Jumping Frogs Optimization	JFO	2008	1	13	Garcia, F. J. M.	Pérez, J. A. M.	 	 	 	 	 	 	 	 	Documentos de Trabajo del DEIOC	 	1	44	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Jumping Frogs Optimization	JFO	2008	1	13	Garcia, F. J. M.	Pérez J. A. M.	 	 	 	 	 	 	 	 	Documentos de Trabajo del DEIOC	 	1	44	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Fish School Search	FFS	2009	1	13	Filho C. J. A. B.	Neto F. B. de L.	Lins A. J. C. C.	Nascimento A. I. S.	Lima M. P.	 	 	 	 	1	Nature-Inspired Algorithms for Optimisation	1	2	0	 	 	 	 	2	1	0	0	4	2	1	0	0	0	7	3	1	1	7	2	0	0	15	1
 Artificial Searching Swarm Algorithm	ASSA	2009	1	13	Chen T.	 	 	 	 	 	 	 	 	2	2009 International Joint Conference on Computational Sciences and Optimization	3	2	0	 	 	 	 	3	1	0	0	0	0	1	0	0	0	4	1	0	0	0	0	0	0	4	1
 Hierarchical Swarm Model	HSM	2010	1	13	Chen H.	Zhu Y.	Hu K.	He X.	 	 	 	 	 	1	Discrete Dynamics in Nature and Society	6	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
@@ -85,7 +85,7 @@ Biology Migration Algorithm	BMA	2018	1	13	Zhang Q.	Wang R.	Yang J.	Lewis A.	Chic
 Lion Pride Optimization Algorithm	LPOA	2018	1	13	Kaveh A.	Mahjoubi S.	 	 	 	 	 	 	 	1	Scientia Iranica	34	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Wildebeests Herd Optimization	WHO	2018	1	13	Motevali M. M.	Shanghooshabad A. M.	Aram R. Z.	Keshavarz H.	 	 	 	 	 	1	International Journal of Pattern Recognition and Artificial Intelligence	8	1	0	45	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Artificial Social Cockroaches	ASC	2018	1	13	Bouarara H. A.	Hamou R. M.	Amine A.	 	 	 	 	 	 	1	International Journal of Strategic Decision Sciences	29	1	47	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	1
-Meerkat-inspired Algorithm	MEA	2018	1	13	Klein C. E.	dos Santos Coelho L.	 	 	 	 	 	 	 	2	ESANN 2018 : European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning	35	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Meerkat-inspired Algorithm	MEA	2018	1	13	Klein C. E.	dos Santos Coelho L.	 	 	 	 	 	 	 	2	ESANN 2018 : European Symposium on Artificial Neural Networks Computational Intelligence and Machine Learning	35	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Seagull Optimization Algorithm	SOA	2019	1	13	Dhiman G.	Kumar V.	 	 	 	 	 	 	 	1	Knowledge-Based Systems	2	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Vocalization of Humpback Whale Optimization Algorithm	VWOA	2019	1	13	Masadeh R.	Sharieh A.	Mahafzah B. A.	 	 	 	 	 	 	1	International Journal of Advanced Science and Technology	38	1	4	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Military Dog Optimizer	MDBO	2019	1	13	Tripathi A. K.	Sharma K.	Bala M.	 	 	 	 	 	 	1	Neural and Evolutionary Computing	11	1	53	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
@@ -115,7 +115,7 @@ Superbug Algorithm	 	2012	2	21	Anandaraman C.	Sankar A. V. M.	Natarajan R.	 	 	 
 Keshtel Algorithm	KA	2013	2	21	Hajiaghaei-Keshteli M.	Aminnayeri M.	 	 	 	 	 	 	 	2	IEEE conference on industrial engineering and management systems	3	 	 	 	 	 	 	0	0	0	0	1	1	0	0	0	0	1	1	0	0	0	0	0	0	1	1
 Swine Influenza Models Based Optimization	SIMBO	2013	2	21	Pattnaik S. S.	Bakwad K. M.	Sohi B. S.	Ratho R. K.	Devi S.	 	 	 	 	1	Applied Soft Computing	2	1	0	28	 	 	 	1	0	0	0	1	1	4	3	0	0	6	4	0	0	1	0	0	0	7	1
 Dolphin Echolocation	DE	2013	2	21	Kaveh A.	Farhoudi N.	 	 	 	 	 	 	 	1	Advances in Engineering Software	2	1	1	 	 	 	 	15	13	0	0	0	0	2	1	0	0	17	14	0	0	0	0	0	0	17	1
-Green Herons Optimization Algorithm	GHOA	2013	2	21	Sur C.	Shukla A.	 	 	 	 	 	 	 	2	SEMCCO 2013: Swarm, Evolutionary, and Memetic Computing	1	1	2	 	 	 	 	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1
+Green Herons Optimization Algorithm	GHOA	2013	2	21	Sur C.	Shukla A.	 	 	 	 	 	 	 	2	SEMCCO 2013: Swarm Evolutionary and Memetic Computing	1	1	2	 	 	 	 	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1
 Egyptian Vulture Optimization Algorithm	EVOA	2013	2	21	Sur C.	Sharma S.	Shukla A.	 	 	 	 	 	 	2	The 9th International Conference on Computing and InformationTechnology (IC2IT2013)	1	1	3	 	 	 	 	2	2	0	0	3	3	1	1	0	0	6	6	1	1	0	0	0	0	7	1
 Jumper Firefly Algorithm	JFA	2013	2	21	Bidar M.	Kanan H. R.	 	 	 	 	 	 	 	2	3rd International eConference on Computer and Knowledge Engineering	3	1	5	 	 	 	 	0	0	0	0	1	0	1	1	0	0	2	1	0	0	0	0	0	0	2	1
 Cuttlefish Algorithm	CFA	2013	2	21	Eesa A. S.	Brifcani A. M. A.	Orman Z.	 	 	 	 	 	 	1	International Journal of Scientific & Engineering Research	 	2	0	 	 	 	 	1	1	0	0	0	0	0	0	1	1	2	2	2	2	4	4	0	0	8	1
@@ -135,9 +135,9 @@ Shark Smell Optimization	SSO	2016	2	21	Abedinia O.	Amjady N.	Ghasemi A.	 	 	 	 	
 Crow Search Algorithm	CSA	2016	2	21	Askarzadeh A.	 	 	 	 	 	 	 	 	1	Computers & Structures	2	1	1	 	 	 	 	7	3	0	0	8	5	35	17	2	1	52	26	7	6	11	9	0	0	70	2
 Camel Algorithm	CA	2016	2	21	Ibrahim M. K.	Ali R. S.	 	 	 	 	 	 	 	1	Iraqi Journal for Electrical And Electronic Engineering	22	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Virulence Optimization Algorithm	VOA	2016	2	21	Jaderyan M.	Khotanlou H.	 	 	 	 	 	 	 	1	Applied Soft Computing	2	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Mosquito flying optimization	MFO	2016	2	21	Alauddin M.	 	 	 	 	 	 	 	 	2	2016 International Conference on Electrical, Electronics, and Optimization Techniques (ICEEOT)	3	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Mosquito flying optimization	MFO	2016	2	21	Alauddin M.	 	 	 	 	 	 	 	 	2	2016 International Conference on Electrical Electronics and Optimization Techniques (ICEEOT)	3	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Red Deer Algorithm	RDA	2016	2	21	Fard A. M. F.	Hajiaghaei-Keshteli M.	 	 	 	 	 	 	 	2	International Conference on Industrial Engineering	3	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Rhino Herd	RH	2016	2	21	Wang G.-G.	Gao X.-Z.	Zenger K.	Coelho L. dos S.	 	 	 	 	 	2	9th EUROSIM Congress on Modelling and Simulation, EUROSIM 2016, The 57th SIMS Conference on Simulation and Modelling SIMS 2016	50	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Rhino Herd	RH	2016	2	21	Wang G.-G.	Gao X.-Z.	Zenger K.	Coelho L. dos S.	 	 	 	 	 	2	9th EUROSIM Congress on Modelling and Simulation EUROSIM 2016 The 57th SIMS Conference on Simulation and Modelling SIMS 2016	50	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Polar Bear Optimization Algorithm	PBO	2017	2	21	Połap D.	Wo´zniak M.	 	 	 	 	 	 	 	1	Symmetry	20	1	0	1	 	 	 	0	0	0	0	0	0	2	2	0	0	2	2	0	0	0	0	0	0	2	1
 Fish Electrolocation Optimization	FEO	2017	2	21	Haldar V.	Chakraborty N.	 	 	 	 	 	 	 	1	Soft Computing	1	1	0	25	 	 	 	0	0	0	0	2	0	0	0	0	0	2	0	0	0	0	0	0	0	2	1
 Satin Bowerbird Optimizer	SBO	2017	2	21	Samareh Moosavi S. H.	Khatibi Bardsiri V.	 	 	 	 	 	 	 	1	Engineering Applications of Artificial Intelligence	2	1	0	52	 	 	 	0	0	0	0	2	2	2	2	0	0	4	4	0	0	0	0	0	0	4	1
@@ -150,14 +150,14 @@ Cyclical Parthenogenesis Algorithm	CPA	2017	2	21	Kaveh A.	Zolghadr A.	 	 	 	 	 	
 Beetle Swarm Optimization Algorithm	BSO	2018	2	21	Wang T.	Yang L.	Liu Q.	 	 	 	 	 	 	1	Neural and Evolutionary Computing	11	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Eagle Piercing Optimizer	EPO	2018	2	21	Khan A. T.	Senior S. L.	Stanimirovic P. S.	Zhang Y.	 	 	 	 	 	1	Neural and Evolutionary Computing	11	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Rhinoceros Search Algorithm	RSA	2018	2	21	Deb S.	Tian Z.	Fong S.	Tang R.	Wong R.	Dey N.	 	 	 	1	Soft Computing	1	1	0	4	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Dolphin Pod Optimization	DPO	2018	2	21	Serani A.	Diez M.	 	 	 	 	 	 	 	2	MOD 2017: Machine Learning, Optimization, and Big Data	1	1	0	23	 	 	 	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Dolphin Pod Optimization	DPO	2018	2	21	Serani A.	Diez M.	 	 	 	 	 	 	 	2	MOD 2017: Machine Learning Optimization and Big Data	1	1	0	23	 	 	 	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Owl Search Algorithm	OSA	2018	2	21	Jain M.	Maurya S.	Rani A.	Singh V.	 	 	 	 	 	1	Journal of Intelligent & Fuzzy Systems	12	1	0	36	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Pontogammarus Maeoticus Swarm Optimization	PMSO	2018	2	21	Ghojogh B.	Sharifian S.	 	 	 	 	 	 	 	1	Neural and Evolutionary Computing	11	1	0	40	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Barnacles Mating Optimizer	BMO	2018	2	21	Duman E.	Uysal M.	Alkaya A. F.	 	 	 	 	 	 	1	Information Sciences	2	1	5	 	 	 	 	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	1	1
 Mouth Brooding Fish algorithm	MBF	2018	2	21	Jahani E.	Chizari M.	 	 	 	 	 	 	 	1	Applied Soft Computing	2	2	0	 	 	 	 	0	0	1	1	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1
 Pity Beetle Algorithm	PBA	2018	2	21	Kallioras N. A.	Lagaros N. D.	Avtzis D. N.	 	 	 	 	 	 	1	Advances in Engineering Software	2	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Cheetah Based Optimization Algorithm	CBA	2018	2	21	Klein C. E.	Mariani V. C.	Coelho L. dos S.	 	 	 	 	 	 	2	ESANN 2018 : European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning	35	2	0	 	 	 	 	0	0	0	0	0	0	1	1	0	0	1	1	0	0	0	0	0	0	1	1
-Circular Structures of Puffer Fish	CSOPF	2018	2	21	Catalbas M. C.	Gulten A.	 	 	 	 	 	 	 	2	2018 Third International Conference on Electrical and Biomedical Engineering, Clean Energy and Green Computing (EBECEGC)	3	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Cheetah Based Optimization Algorithm	CBA	2018	2	21	Klein C. E.	Mariani V. C.	Coelho L. dos S.	 	 	 	 	 	 	2	ESANN 2018 : European Symposium on Artificial Neural Networks Computational Intelligence and Machine Learning	35	2	0	 	 	 	 	0	0	0	0	0	0	1	1	0	0	1	1	0	0	0	0	0	0	1	1
+Circular Structures of Puffer Fish	CSOPF	2018	2	21	Catalbas M. C.	Gulten A.	 	 	 	 	 	 	 	2	2018 Third International Conference on Electrical and Biomedical Engineering Clean Energy and Green Computing (EBECEGC)	3	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Water-Tank Fish Algorithm	 	2018	2	21	Sukoon M.	Banka H.	 	 	 	 	 	 	 	1	International Journal of Computer Applications	 	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Cheetah Chase Algorithm	CCA	2018	2	21	Goudhaman M.	 	 	 	 	 	 	 	 	1	International Journal of Engineering & Technology	40	2	0	 	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Falcon Optimization Algorithm	FOA	2019	2	21	Segundo E. H. de V.	Mariani V. C.	Coelho L. dos S.	 	 	 	 	 	 	1	Applied Thermal Engineering	2	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
@@ -194,7 +194,7 @@ Root Growth Algorithm	RGA	2014	2	22	Zhang H.	Zhu Y.	Chen H.	 	 	 	 	 	 	1	Soft C
 Seed-based Plant Propagation Algorithm	SbPPA	2015	2	22	Sulaiman M.	Salhi A.	 	 	 	 	 	 	 	1	The Scientific World Journal	6	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Tree Seed Algorithm	TSA	2015	2	22	Kiran M. S.	 	 	 	 	 	 	 	 	1	Expert Systems with Applications	2	1	0	29	 	 	 	4	3	0	0	1	1	3	2	2	1	10	7	3	2	3	1	0	0	16	1
 Runner-root Algorithm	RRA	2015	2	22	Merrikh-Bayat F.	 	 	 	 	 	 	 	 	1	Applied Soft Computing	2	1	0	42	 	 	 	0	0	0	0	0	0	2	2	0	0	2	2	0	0	2	2	0	0	4	1
-Natural Forest Regeneration	NFR	2016	2	22	Moez H.	Kaveh A.	Taghizadieh N.	 	 	 	 	 	 	1	Iranian Journal of Science and Technology, Transactions of Civil Engineering	1	1	0	1	 	 	 	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1
+Natural Forest Regeneration	NFR	2016	2	22	Moez H.	Kaveh A.	Taghizadieh N.	 	 	 	 	 	 	1	Iranian Journal of Science and Technology Transactions of Civil Engineering	1	1	0	1	 	 	 	1	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1
 Waterweeds Algorithm	WW	2016	2	22	Cheng L.	Zhang Q.	Tao F.	Ni K.	Cheng Y.	 	 	 	 	1	The International Journal of Advanced Manufacturing Technology	1	1	0	4	 	 	 	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1
 Root Tree Optimization Algorithm	RTO	2016	2	22	Labbi Y.	Attous  D. B.	Gabbar  H. A.	Mahdad B.	Zidan A.	 	 	 	 	1	International Journal of Electrical Power & Energy Systems	2	1	0	22	 	 	 	0	0	0	0	0	0	8	2	0	0	8	2	0	0	1	1	0	0	9	1
 Artificial Tree Algorithm	AT	2017	2	22	Li Q. Q.	Song K.	He Z. C.	Li E.	Cheng A. G.	Chen T.	 	 	 	1	Engineering Applications of Artificial Intelligence	2	2	0	 	 	 	 	0	0	0	0	0	0	1	1	1	1	2	2	1	1	1	1	0	0	4	1
@@ -218,7 +218,7 @@ Chemotherapy Science Algorithm	CSA	2017	2	23	Salmani M. H.	Eshghi K.	 	 	 	 	 	 
 Kidney-inspired Algorithm	KA	2017	2	23	Jaddi N. S.	Alvankarian J.	Abdullah S.	 	 	 	 	 	 	1	Communications in Nonlinear Science and Numerical Simulation	2	2	0	 	 	 	 	1	1	0	0	0	0	5	5	1	1	7	7	1	1	2	2	0	0	10	1
 Artificial Coronary Circulation System	ACCS	2019	2	23	Kooshkbaghi M.	Kaveh A.	 	 	 	 	 	 	 	1	Scientia Iranica	34	1	1	 	 	 	 	2	2	0	0	0	0	0	0	0	0	2	2	0	0	0	0	0	0	2	1
 Artificial Ecosystem-based Optimization	AEO	2019	2	23	Zhao W.	Wang L.	Zhang Z.	 	 	 	 	 	 	1	Neural Computing and Applications	1	1	0	1	54	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Space Gravitational Algorithm	SGA	2005	3	31	Hsiao Y. T.	Chuang C. L.	Jiang J. A.	Chien C. C.	 	 	 	 	 	2	2005 IEEE International Conference on Systems, Man and Cybernetics	3	1	1	0	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Space Gravitational Algorithm	SGA	2005	3	31	Hsiao Y. T.	Chuang C. L.	Jiang J. A.	Chien C. C.	 	 	 	 	 	2	2005 IEEE International Conference on Systems Man and Cybernetics	3	1	1	0	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Big Bang - Big Crunch	BB-BC	2006	3	31	Erol O. K.	Eksin I.	 	 	 	 	 	 	 	1	Advances in Engineering Software	2	2	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	 	 	2
 Gravitational Search Algorithm	GSA	2009	3	31	Rashedi E.	Nezamabadi-Pour H.	Saryazdi S.	 	 	 	 	 	 	1	Information Sciences	2	2	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	 	 	5
 Galaxy-based Search Algorithm	GbSA	2011	3	31	Shah-Hosseini H.	 	 	 	 	 	 	 	 	1	International Journal of Computational Science and Engineering	5	1	7	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
@@ -232,7 +232,7 @@ Intelligent Water Drop	IWD	2007	3	32	Shah-Hosseini H.	 	 	 	 	 	 	 	 	2	2007 IEE
 River Formation Dynamics	RFD	2007	3	32	Rabanal P.	Rodriguez I.	Rubio F.	 	 	 	 	 	 	2	International Conference on Unconventional Computation and Natural Computation	1	1	2	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
 Wind Driven Optimization	WDO	2010	3	32	Bayraktar Z.	Komurcu M.	Werner D. H.	 	 	 	 	 	 	2	2010 IEEE Antennas and Propagation Society International Symposium	3	1	0	1	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
 Water Cycle Algorithm	WCA	2012	3	32	Eskandar H.	Sadollah A.	Bahreininejad A.	Hamdi M.	 	 	 	 	 	1	Computers & Structures	2	1	1	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
-Atmosphere Clouds Model Optimization	ACMO	2012	3	32	Gao-Wei Y.	Zhanju H.	 	 	 	 	 	 	 	2	2012 International Conference on Computing, Measurement, Control and Sensor Netw	3	2	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
+Atmosphere Clouds Model Optimization	ACMO	2012	3	32	Gao-Wei Y.	Zhanju H.	 	 	 	 	 	 	 	2	2012 International Conference on Computing Measurement Control and Sensor Netw	3	2	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
 Artificial Raindrop Algorithm	ARA	2014	3	32	Jiang Q.	Wang L.	Hei X.	Fei R.	Yang D.	Zou F.	Li H.	Cao Z.	Lin Y.	2	2014 IEEE Congress on Evolutionary Computation (CEC)	3	1	15	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
 Hurricane-based Optimization	HO	2014	3	32	Rbouh I.	El Imrani A. A.	 	 	 	 	 	 	 	2	AASRI Procedia	2	2	0	 	 	 	 	0	0	0	0	0	0	1	1	0	0	1	1	0	0	0	0	0	0	1	1
 Lightning Search Algorithm	LSA	2015	3	32	Shareef H.	Ibrahim A. A.	Mutlag A. H.	 	 	 	 	 	 	1	Applied Soft Computing	2	1	0	2	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
@@ -248,8 +248,8 @@ Hydrological Cycle Algorithm	HCA	2017	3	32	Wedyan A.	Whalley J.	Narayanan A.	 	 
 Nuclear Fission–Nuclear Fusion	N2F	2018	3	32	Yalcin Y.	Pekcan O.	 	 	 	 	 	 	 	1	Neural Computing and Applications	1	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Nuclear Reaction Optimization	NRO	2019	3	32	Wei Z.	Huang C.	Wang X.	Han T.	Li Y.	 	 	 	 	1	IEEE Access	3	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Whirlpool Algorithm	WA	2019	3	32	Zou Y.	 	 	 	 	 	 	 	 	1	Engineering Computations	28	1	0	1	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Electrostatic Discharge Algorithm	ESDA	2019	3	32	Bouchekara H. R. E. H.	 	 	 	 	 	 	 	 	1	IET Science, Measurement & Technology	3	1	0	46	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
-Targeted Showering Optimization	TSO	2019	3	32	Luqman M.	Saeed M.	Ali J.	Tabassam M. F.	Mahmood, T.	 	 	 	 	1	Pakistan Journal of Agricultural Sciences	 	1	0	41	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Electrostatic Discharge Algorithm	ESDA	2019	3	32	Bouchekara H. R. E. H.	 	 	 	 	 	 	 	 	1	IET Science Measurement & Technology	3	1	0	46	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+Targeted Showering Optimization	TSO	2019	3	32	Luqman M.	Saeed M.	Ali J.	Tabassam M. F.	Mahmood T.	 	 	 	 	1	Pakistan Journal of Agricultural Sciences	 	1	0	41	 	 	 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
 Harmony Search	HS	2001	3	33	Geem Z. W.	Kim J. H.	Loganathan G. V.	 	 	 	 	 	 	1	Simulation	47	1	2	0	1	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	1	 	5
 Hysteretic Optimization	HO	2002	3	33	Zarand G.	Pazmandi F.	Pal K.	Zimanyi G. T.	 	 	 	 	 	1	Physical Review Letters	16	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	0	 	1
 Electromagnetism-like Optimization	EM	2003	3	33	Birbil S. I.	Fang S. C.	 	 	 	 	 	 	 	1	Journal Of Global Optimization	1	2	0	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	0	 	 	3
