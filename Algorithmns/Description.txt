@@ -1,0 +1,186 @@
+--------------------------------------------------------
+Description of the "Nature Inspired Algorithms" database
+--------------------------------------------------------
+
+© A. Tzanetos, 2020
+
+The database consists of 43 variables, as follows:
+
+1  - Algorithm_name: the algorithm's name
+2  - Abbr: Abbreviation
+3  - Year: Year presented
+4  - Category: in which nature-inspired intelligent category belongs to
+	{1, Swarm Intelligence}
+	{2, Organisms-based}
+	{3, Physical Phenomena & Laws of Science}
+	{4, Other inspiration}
+5  - Subcategory: the sub-category
+	{11, Foraging}
+	{12, Social Behaviour}
+	{13, Other Swarm Behaviours}
+	{21, Fauna}
+	{22, Flora}
+	{23, Other}
+	{31, Universe}
+	{32, Nature Phenomena}
+	{33, Laws of Science}
+6  - Author1: First author of initial work presenting the algorithm
+7  - Author2: Second author of initial work presenting the algorithm
+8  - Author3: Third author of initial work presenting the algorithm
+9  - Author4: Next author of initial work presenting the algorithm
+10 - Author5: Next author of initial work presenting the algorithm
+11 - Author6: Next author of initial work presenting the algorithm
+12 - Author7: Next author of initial work presenting the algorithm
+13 - Author8: Next author of initial work presenting the algorithm
+14 - Author9: Next author of initial work presenting the algorithm
+15 - Publication: Where the algorithm was initial presented (Journal or Conference)?
+	{1, Journal}
+	{2, Conference/Congress}
+16 - Jrnl_or_conf_name: Name of the Journal or the Conference
+17 - Publisher: Under which publication house was the algorithm initially published?
+	{1, Springer}
+	{2, Elsevier}
+	{3, IEEE}
+	{4, ACM}
+	{5, InderScience}
+	{6, Hindawi}
+	{7, Wiley}
+	{8, World Scientific}
+	{9, Taylor & Francis}
+	{10, AIP Publishing}
+	{11, arXiv.org}
+	{12, IOS Press}
+	{13, EMW Publishing}
+	{14, Publications International}
+	{15, Kaunas University of Technology}
+	{16, American Physical Society}
+	{17, AAAS}
+	{18, Islamic Azad University, Rasht Branch}
+	{19, Hikari}
+	{20, MDPI AG}
+	{21, Academic Journals}
+	{22, IRAQI Academic Scientific Journals}
+	{23, Iran University of Science & Technology}
+	{24, Morgan Kaufmann Publishers}
+	{25, Foundation of Computer Science}
+	{26, Zhejiang University}
+	{27, Tsang Hai Book Publishing Co.}
+	{28, Emerald Publishing Limited}
+	{29, IGI Global}
+	{30, Canadian Center of Science and Education}
+	{31, bepress}
+	{32, University of Essex}
+	{33, OMICS International}
+	{34, Sharif University of Technology}
+	{35, i6doc}
+	{36, World Academic Press}
+	{37, Medwell Publishing}
+	{38, NADIA}
+	{39, Institute of Advanced Engineering and Science}
+	{40, Science Publishing Corporation}
+	{41, Global Trends Academy}
+	{42, The Institute of Research & Community Outreach - Petra Christian University}
+	{43, International University of Sarajevo}
+	{44, Atlantis Press}
+	{45, EBSCO Industries}
+	{46, Building & Housing Research Center}
+	{47, Sage Journals}
+	{48, COPPE Publication}
+	{49, Scientific Research}
+	{50, Linköping University Electronic Press}
+18 - Application: Has the algorithm been applied in real problems in the initial work?
+	{0, No}
+	{1, Yes}
+	{2, Only Benchmark functions}
+19 - App1: First application of the algorithm in initial work
+20 - App2: Second application of the algorithm in initial work
+21 - App3: Third application of the algorithm in initial work
+22 - App4: Forth application of the algorithm in initial work
+	(in all the above: app1 - app4)
+	{0, Benchmark functions}
+	{1, Design Engineering Optimization}
+	{2, TSP/VRP}
+	{3, Knapsack}
+	{4, Scheduling Problems}
+	{5, Assignment Problems}
+	{6, Character/Pattern Recognition}
+	{7, Principal Components Analysis}
+	{8, Clustering}
+	{9, SAT}
+	{10, Classification}
+	{11, Mobile Network Deployment Problem}
+	{12, Design of Off-Shore Wind Farms}
+	{13, Placement-Wiring}
+	{14, Potential Problems}
+	{15, Stable Linear System}
+	{16, Artificial Neural Networks training}
+	{17, Graph Coloring}
+	{18, Image Tracking}
+	{19, TSC problem}
+	{20, Cell Formation Problems}
+	{21, Hydrogeologic Parameter Estimation Problem}
+	{22, Economic Load Dispatch}
+	{23, Hull-form SBD}
+	{24, Graph Partitioning}
+	{25, Reliability}
+	{26, Quanser Heat Flow Experiment}
+	{27, The Steiner problem}
+	{28, Motion Estimation}
+	{29, Image Thresholding}
+	{30, Groundwater Model Calibration}
+	{31, Airfoil design}
+	{32, Finite Element Inverse Analysis}
+	{33, Load Frequency Control}
+	{34, Chlorobenzene Purification Process Design}
+	{35, Optimal Power Flow}
+	{36, Heat Flow Experiment}
+	{37, Minimal exposure problem of wireless sensor networks}
+	{38, Steiner tree problem}
+	{39, Air Robot Path Planning Problem}
+	{40, Solar PV Array}
+	{41, Optimal Crop Rotation Problem}
+	{42, Robust Control Theory}
+	{43, Speed reducer problem}
+	{44, p-Median Problem}
+	{45, Customer Segmentation Problem}
+	{46, EMC filter}
+	{47, Suspicious Person Detection}
+	{48, Robot navigation}
+	{49, N-Queens Problem}
+	{50, Pattern Recognition}
+	{51, Optimization of Rainbow Boxes}
+	{52, Software Development Effort Estimation}
+	{53, Fake Review Detection}
+	{54, Identification of hydrogeological parameters}
+23 - Notes: Notes on the paper
+	{1, Retracted}
+24 - EngTotal: # of published works in Engineering Applications
+25 - EngJournals: # of Journal publications in Engineering Applications
+26 - FinTotal: # of published works in Finance Applications
+27 - FinJournals: # of Journal publications in Finance Applications
+28 - OR_Total: # of published works in Operational Research Applications
+29 - OR_Journals: # of Journal publications in Operational Research Applications
+30 - EnerTotal: # of published works in Energy Applications
+31 - EnerJournals: # of Journal publications in Energy Applications
+32 - OtherTotal: # of published works in Other Optimization Applications
+33 - OtherJournals: # of Journal publications in Other Optimization Applications
+34 - OptTotal: # of published works in Optimization Applications (sum of the previous categories)
+35 - OptJournals: # of Journal publications in Optimization Applications (sum of Journal publications of previous categories)
+36 - ClustClassTot: # of published works in Clustering/Classification Applications
+37 - ClustClassJour: # of Journal publications in Clustering/Classification Applications
+38 - ForecTotal: # of published works in Forecasting and other Applications
+39 - ForecJour: # of Journal publications in Forecasting and other Applications
+40 - NoApplicAlg: Nominal variable denoting algorithms without any application
+	{0, Has applications}
+	{1, No Application}
+41 - Established: Established algorithms (with over 200 application publications)
+	{0, non-established}
+	{1, established}
+42 - Total_Works: Total published implementations
+43 - TotalWorksBinned: Total published implementations (Binned)
+	{0, 0 applications}
+	{1, <= 50 applications}
+	{2, 51 - 100 applications}
+	{3, 101 - 150 applications}
+	{4, 151 - 200 applications}
+	{5, 201+ applications}
