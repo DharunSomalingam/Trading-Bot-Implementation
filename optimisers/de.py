@@ -44,7 +44,7 @@ class DE(Optimiser):
 
                 trial = np.where(cross, mutant, pop[j])
 
-                trial = np.clip(trial, 0, 1)  # safety
+                trial = np.clip(trial, 0, 1)
                 trial_denorm = min_b + trial * diff
 
                 f = self.fitness(bot, trial_denorm)
