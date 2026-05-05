@@ -86,3 +86,24 @@ This data is used to:
 - Performance evaluation on real financial data  
 
 ---
+
+## Artificial Bee Colony Optimiser
+
+This section contains the implementation progress for the Artificial Bee Colony algorithm used for Deliverable 2.
+
+### Current Progress
+
+- Implemented the core Artificial Bee Colony optimiser in `optimisers/artificial_bee_colony.py`.
+- Added a simple benchmark test in `optimisers/test_abc_optimizer.py` to confirm that the optimiser can improve candidate solutions over iterations.
+- Added a convergence visualisation in `visualisations/abc_convergence_plot.py`.
+- Generated a convergence plot showing how the best fitness improves across iterations.
+
+### Next Steps
+
+- Connect the ABC optimiser to the Bitcoin trading bot fitness function.
+- Run experiments for the 2D, 3D, 7D, 14D and 21D parameter spaces.
+- Compare ABC performance against the other algorithms used by the team.
+
+### Notes
+
+The 2D, 3D, 7D, 14D and 21D experiments refer to the number of parameters being optimised in the trading strategy. The project specification describes 7D as a blended signal using weights, durations and EMA alpha; 14D extends this to high-frequency and low-frequency signals; and 21D extends this further for a MACD-style bot. 
