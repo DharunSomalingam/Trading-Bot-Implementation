@@ -1,9 +1,6 @@
-
-
-from .base import  Optimiser
+from .base import Optimiser
 import numpy as np
 import time
-import random
 
 class DE(Optimiser):
     def __init__(self, config, mutate_rate=0.8, crossp=0.7):
@@ -12,24 +9,25 @@ class DE(Optimiser):
         self.crossp = crossp
 
     def fitness(self, bot, params):
-        return -bot.evaluate(params)  # minimise negative profit
+        return bot.evaluate(params)
 
     def optimise(self, bot):
 
-        # bounds setup
         min_b, max_b = np.array(self.bounds).T
         diff = max_b - min_b
-
-        # init population in [0,1]
         pop = np.random.rand(self.pop_size, self.dim)
 
         pop_denorm = min_b + pop * diff
         fitness = np.array([self.fitness(bot, p) for p in pop_denorm])
 
-        best_idx = np.argmin(fitness)
+        best_idx = np.argmax(fitness)
         best = pop_denorm[best_idx]
 
-        for _ in self._iter_loop():
+        start_time = time.time()
+        calls0 = bot.eval_count
+        best_hist = [fitness[best_idx]]
+
+        for iteration in self._iter_loop():
 
             for j in range(self.pop_size):
 
@@ -49,12 +47,18 @@ class DE(Optimiser):
 
                 f = self.fitness(bot, trial_denorm)
 
-                if f < fitness[j]:
+                if f > fitness[j]:
                     pop[j] = trial
                     fitness[j] = f
 
-                    if f < fitness[best_idx]:
+                    if f > fitness[best_idx]:
                         best_idx = j
                         best = trial_denorm
 
-            yield best, -fitness[best_idx]
+            best_hist.append(fitness[best_idx])
+            calls_made = bot.eval_count - calls0
+
+            if self._should_stop(start_time, calls_made, best_hist):
+                break
+
+            yield best, fitness[best_idx]
