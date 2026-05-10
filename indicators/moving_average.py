@@ -14,6 +14,13 @@ class Indicators:
         return np.convolve(padded, kernel, mode='valid')
 
     @staticmethod
+    def lma(series, n):
+        weights = np.array([1 - k/n for k in range(n)])
+        kernel = weights * (2 / (n + 1))
+        padded = Indicators.pad(series, n)
+        return np.convolve(padded, kernel, mode='valid')
+
+    @staticmethod
     def ema(series, n, alpha=None):
         if alpha is None:
             alpha = 2 / (n + 1)

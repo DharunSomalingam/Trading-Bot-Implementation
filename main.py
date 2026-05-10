@@ -3,8 +3,10 @@ import numpy as np
 import pandas as pd
 from trading_system import trading_bot
 from trading_strategies import strategies
-from optimisers import de
+#from optimisers import de
 from visualisations import visualisation
+from optimisers import ga       
+
 
 
 def load_data(filepath):
@@ -63,7 +65,7 @@ def run_optimization(prices, strategy_name='SMA'):
     bot = trading_bot.TradingBot(prices, strategy)
 
 
-    optimizer = de.DE(config)
+    optimizer = ga.GA(config)
 
     convergence = []
 
@@ -92,7 +94,7 @@ def run_optimization(prices, strategy_name='SMA'):
 
 if __name__ == "__main__":
 
-    prices = load_data('data/BTC-Hourly.csv')
+    prices = load_data('data/BTC-Daily.csv')
 
     if prices is None or len(prices) < 500:
         print("Data loading failed!")
