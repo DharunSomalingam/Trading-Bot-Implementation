@@ -4,13 +4,14 @@ import argparse
 from trading_system import trading_bot
 from trading_strategies import strategies
 from visualisations import visualisation
-from optimisers import ga, pso, de
+from optimisers import ga, pso, de, abc 
 
 
 ALGORITHMS = {
     'PSO': pso.PSO,
     'GA':  ga.GA,
     'DE':  de.DE,
+    'ABC': abc.ABC, 
 }
 
 STRATEGIES = {
