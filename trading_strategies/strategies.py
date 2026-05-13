@@ -8,8 +8,8 @@ class BaseStrategy(ABC):
     def generate(self, price, params):
         pass
 
-
-class SMACrossover(BaseStrategy):
+#2D
+class SMACrossover(BaseStrategy): 
 
     def generate(self, price, params):
         short_w = int(params[0])
@@ -27,8 +27,7 @@ class SMACrossover(BaseStrategy):
 
         return np.where(short_ma>long_ma,1,-1)
 
-
-
+#3D
 class MACDCrossover(BaseStrategy):
 
     def generate(self, price, params):

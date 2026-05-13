@@ -3,29 +3,28 @@ import numpy as np
 import pandas as pd
 from trading_system import trading_bot
 from trading_strategies import strategies
-from optimisers import de
+#from optimisers import de
 from visualisations import visualisation
+from optimisers import ga       
+
 
 
 def load_data(filepath):
     try:
         df = pd.read_csv(filepath)
+        df['date'] = pd.to_datetime(df['date'])
+        df = df.sort_values('date').reset_index(drop=True)  
 
-        if 'close' in df.columns:
-            prices = df['close'].values
-        else:
-            prices = df.iloc[:, 6].values
+        # training data = prices before 2020, testing data = prices after 2020
+        train_mask = df['date'] < '2020-01-01'
+        prices_train = df['close'][train_mask].values
+        prices_test  = df['close'][~train_mask].values
 
-
-        prices = prices[::-1]
-        print(f" Loaded {len(prices)} points")
-        print(f" Start: ${prices[0]:.2f}, End: ${prices[-1]:.2f}")
-        print(f" Return: {(prices[-1]/prices[0] - 1)*100:+.1f}%")
-        return prices
+        return prices_train, prices_test  
 
     except Exception as e:
         print(f"Error: {e}")
-        return None
+        return None, None
 
 
 def run_optimization(prices, strategy_name='SMA'):
@@ -63,7 +62,7 @@ def run_optimization(prices, strategy_name='SMA'):
     bot = trading_bot.TradingBot(prices, strategy)
 
 
-    optimizer = de.DE(config)
+    optimizer = ga.GA(config)
 
     convergence = []
 
@@ -92,20 +91,17 @@ def run_optimization(prices, strategy_name='SMA'):
 
 if __name__ == "__main__":
 
-    prices = load_data('data/BTC-Hourly.csv')
+    prices_train, prices_test = load_data('data/BTC-Daily.csv')
 
-    if prices is None or len(prices) < 500:
+    if prices_train is None or len(prices_train) < 500:
         print("Data loading failed!")
-
-
-
 
     print(f"\n{'='*60}")
     print("DIAGNOSTIC: Testing Strategy & Backtest")
     print(f"{'='*60}")
 
     test_strategy = strategies.SMACrossover()
-    test_bot = trading_bot.TradingBot(prices, test_strategy)
+    test_bot = trading_bot.TradingBot(prices_train, test_strategy)
 
     test_cases = [
         [10, 50],
@@ -136,7 +132,10 @@ if __name__ == "__main__":
 
 
     best_params_sma, convergence_sma, bot_sma = run_optimization(
-        prices, strategy_name='SMA'
+        prices_train, strategy_name='SMA'
     )
 
-    visualisation.visualise_results(prices, bot_sma, best_params_sma, convergence_sma, 'SMA')
+    test_bot_sma = trading_bot.TradingBot(prices_test, strategies.SMACrossover())
+    test_result  = test_bot_sma.evaluate(best_params_sma)
+ 
+    visualisation.visualise_results(prices_train, bot_sma, best_params_sma, convergence_sma, 'SMA')
