@@ -40,6 +40,29 @@ STRATEGIES = {
         },
         'diagnostics': [[12, 26, 9], [8, 21, 5], [5, 20, 7]],
     },
+        'WMA': {                              
+        'cls':    strategies.WMACrossover,
+        'config': {
+            "pop_size":  50,
+            "max_iter":  200,
+            "dim":       14,
+            "bounds":    [
+                (0, 1), (0, 1), (0, 1),       # weights HIGH
+                (5, 200), (5, 200), (5, 200), # windows HIGH
+                (0.01, 0.99),                  # alpha HIGH
+                (0, 1), (0, 1), (0, 1),       # weights LOW
+                (5, 200), (5, 200), (5, 200), # windows LOW
+                (0.01, 0.99),                  # alpha LOW
+            ],
+            "max_time":  300,
+            "patience":  30,
+            "min_delta": 1.0,
+        },
+        'diagnostics': [
+            [0.5, 0.3, 0.2, 20, 10, 15, 0.3,
+             0.4, 0.4, 0.2, 50, 40, 60, 0.1],
+        ],
+    },
 }
 
 
