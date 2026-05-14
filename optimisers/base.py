@@ -5,6 +5,7 @@ import math
 
 class Optimiser(ABC):
     def __init__(self, config):
+        self.seed = config.get('seed', 42)  
         self.pop_size = config["pop_size"]
         self.max_iter = config.get("max_iter")
         self.dim = config["dim"]

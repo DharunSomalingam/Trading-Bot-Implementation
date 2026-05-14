@@ -33,7 +33,7 @@ STRATEGIES = {
             "pop_size":  30,
             "max_iter":  100,
             "dim":       3,
-            "bounds":    [(5, 30), (20, 60), (5, 20)],
+            "bounds":    [(5, 50), (10, 200), (5, 50)],
             "max_time":  120,
             "patience":  15,
             "min_delta": 1.0,
@@ -135,14 +135,14 @@ def _classify(result):
 
 
 
-def run_optimization(prices, strategy_name, algo_name):
+def run_optimization(prices, strategy_name, algo_name, seed = 42):
     print(f"\n{'='*60}")
     print(f"  {algo_name} x {strategy_name}")
     print(f"{'='*60}\n")
 
     entry     = STRATEGIES[strategy_name]
     strategy  = entry['cls']()
-    config    = entry['config']
+    config    = {**entry['config'], 'seed': seed}
     bot       = trading_bot.TradingBot(prices, strategy)
     optimizer = ALGORITHMS[algo_name](config)
 
@@ -165,26 +165,37 @@ def run_optimization(prices, strategy_name, algo_name):
     return best_params, convergence, bot
 
 
-
 def print_summary(results):
-    print(f"\n{'='*60}")
-    print("RESULTS SUMMARY")
-    print(f"{'='*60}")
-    print(f"{'Strategy':<10} {'Algorithm':<8} {'Train':>12} {'Test':>12}")
-    print("-" * 46)
+    print(f"\n{'='*70}")
+    print("RESULTS SUMMARY (mean ± std over 3 seeds)")
+    print(f"{'='*70}")
+    print(f"  {'Strategy':<12} {'Algorithm':<8} {'Train $':<22} {'Test $'}")
+    print(f"  {'-'*65}")
+    
+    x = 0
 
+    for (strat, algo), r in sorted(results.items()):
+        train_str = f"${r['train_mean']:>10.2f} ± ${r['train_std']:.2f}"
+        test_str  = f"${r['test_mean']:>10.2f} ± ${r['test_std']:.2f}"
+        print(f"  {strat:<12} {algo:<8} {train_str:<22}  {test_str}")
+    
+        if x == 3:
+            print("-" * 46)
+            x = 0
+
+    print(f"\n  {'Strategy':<12} {'Algorithm':<8} {'All train scores'}")
+    print(f"  {'-'*65}")
 
     i = 0
 
-    for (strat, algo), (train_result, test_result) in sorted(results.items()):
-            print(f"{strat:<10} {algo:<8} ${train_result:>10.2f} ${test_result:>10.2f}")
+    for (strat, algo), r in sorted(results.items()):
+        scores = [f"${s:.0f}" for s in r['train_all']]
+        print(f"  {strat:<12} {algo:<8} {scores}")
+        i += 1
             
-            i += 1
-            
-            if i == 3:
-                print("-" * 46)
-                i = 0
-
+        if i == 3:
+            print("-" * 46)
+            i = 0
 
 
 def parse_args():
@@ -250,35 +261,54 @@ if __name__ == "__main__":
     if not args.no_diagnostics:
         run_diagnostics(prices_train, args.strategies)
 
-    results = {}
+    SEEDS = [42]
 
+    results = {}
+    
     for strat_name in args.strategies:
         for algo_name in args.algorithms:
+            train_scores = []
+            test_scores  = []
 
-            try:
-                best_params, convergence, bot_train = run_optimization(
-                    prices_train, strat_name, algo_name
-                )
+            for seed in SEEDS:
+                try:
+                    print(f"\n[{strat_name} | {algo_name} | seed={seed}]")
 
-                if best_params is None:
+                    best_params, convergence, bot_train = run_optimization(
+                        prices_train, strat_name, algo_name, seed=seed
+                    )
+
+                    if best_params is None:
+                        continue
+
+                    train_score = convergence[-1]
+                    bot_test    = trading_bot.TradingBot(
+                        prices_test, STRATEGIES[strat_name]['cls']()
+                    )
+                    test_score = bot_test.evaluate(best_params)
+
+                    train_scores.append(train_score)
+                    test_scores.append(test_score)
+
+                    print(f"  Seed {seed}: Train=${train_score:.2f}, Test=${test_score:.2f}")
+
+                except Exception as e:
+                    print(f"  Seed {seed} FAILED: {e}")
                     continue
 
-                bot_test    = trading_bot.TradingBot(prices_test, STRATEGIES[strat_name]['cls']())
-                test_result = bot_test.evaluate(best_params)
+            if train_scores:
+                results[(strat_name, algo_name)] = {
+                    'train_mean': np.mean(train_scores),
+                    'train_std':  np.std(train_scores),
+                    'test_mean':  np.mean(test_scores),
+                    'test_std':   np.std(test_scores),
+                    'train_all':  train_scores,
+                    'test_all':   test_scores,
+                }
 
-                print(f"\n[{strat_name} | {algo_name}] Out-of-sample: ${test_result:.2f}")
-
-                results[(strat_name, algo_name)] = (bot_train.evaluate(best_params), test_result)
-
-                visualisation.visualise_results(
-                    prices_train, bot_train, best_params, convergence,
-                    f"{strat_name}_{algo_name}"
-                )
-
-            except Exception as e:
-                print(f"\n[{strat_name} | {algo_name}] FAILED: {e}")
-                import traceback
-                traceback.print_exc()
-                continue
-
+            #if best_params is not None:
+            #   visualisation.visualise_results(
+            #        prices_train, bot_train, best_params,
+            #        convergence, f"{strat_name}_{algo_name}"
+            #    )
     print_summary(results)

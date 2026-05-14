@@ -10,7 +10,7 @@ class PSO(Optimiser):
         self.w = w
         self.c1 = c1
         self.c2 = c2
-        self.rng = np.random.default_rng(seed)
+        self.rng = np.random.default_rng(self.seed)
 
     def fitness(self, bot, params):
         return bot.evaluate(params)

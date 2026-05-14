@@ -27,7 +27,6 @@ class GA(Optimiser):
         elitism=2,
         tournament_k=3,
         restart_patience=20,
-        seed=42,
     ):
         super().__init__(config)
         self.crossover_rate   = crossover_rate
@@ -36,7 +35,7 @@ class GA(Optimiser):
         self.elitism          = elitism         # top-N carried over unchanged
         self.tournament_k     = tournament_k    # individuals compared per selection
         self.restart_patience = restart_patience
-        self.rng              = np.random.default_rng(seed)
+        self.rng              = np.random.default_rng(self.seed)
 
     # ── Fitness ────────────────────────────────────────────────────────
 

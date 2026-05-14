@@ -29,18 +29,49 @@ class SMACrossover(BaseStrategy):
 
 #3D
 class MACDCrossover(BaseStrategy):
-
     def generate(self, price, params):
-        fast = int(params[0])
-        slow = int(params[1])
+        fast   = int(params[0])
+        slow   = int(params[1])
         signal = int(params[2])
 
         if fast >= slow:
             return None
 
-        macd_line, signal_line = Indicators.macd(price,fast,slow,signal)
+        macd_line, signal_line = Indicators.macd(price, fast, slow, signal)
 
-        return np.where(macd_line>signal_line,1,-1)
+        min_len    = min(len(macd_line), len(signal_line))
+        macd_line  = macd_line[-min_len:]
+        signal_line = signal_line[-min_len:]
+
+        # ── Generate crossover signal ──────────────────────────
+        # Start neutral
+        signals = np.zeros(min_len, dtype=int)
+
+        # Detect actual crossovers
+        above = macd_line > signal_line
+
+        for i in range(1, min_len):
+            if above[i] and not above[i-1]:
+                signals[i] = 1      # crossed above → buy
+            elif not above[i] and above[i-1]:
+                signals[i] = -1     # crossed below → sell
+
+        # ── Hold position between crossovers ───────────────────
+        position = -1   # start neutral/short
+        result   = np.zeros(min_len, dtype=int)
+
+        for i in range(min_len):
+            if signals[i] == 1:
+                position = 1
+            elif signals[i] == -1:
+                position = -1
+            result[i] = position
+
+        # Pad to match original price length
+        full_signal = np.full(len(price), result[0])
+        full_signal[-min_len:] = result
+
+        return full_signal
 
 #7D
 class WMACrossover7D(BaseStrategy):
