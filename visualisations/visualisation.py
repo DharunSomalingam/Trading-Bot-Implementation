@@ -87,6 +87,6 @@ def visualise_results(prices, bot, best_params, convergence, strategy_name='SMA'
     plt.suptitle(f'{strategy_name} Trading Bot Optimization Results',
                  fontsize=16, fontweight='bold')
 
-    plt.savefig(f'{strategy_name}_optimization_results.png', dpi=150, bbox_inches='tight')
+    plt.savefig(f'png/{strategy_name}_optimization_results.png', dpi=150, bbox_inches='tight')
     print(f"\n Visualization saved as '{strategy_name}_optimization_results.png'")
     plt.show()

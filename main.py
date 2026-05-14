@@ -270,10 +270,10 @@ if __name__ == "__main__":
 
                 results[(strat_name, algo_name)] = (bot_train.evaluate(best_params), test_result)
 
-                #visualisation.visualise_results(
-                #    prices_train, bot_train, best_params, convergence,
-                #    f"{strat_name}_{algo_name}"
-                #)
+                visualisation.visualise_results(
+                    prices_train, bot_train, best_params, convergence,
+                    f"{strat_name}_{algo_name}"
+                )
 
             except Exception as e:
                 print(f"\n[{strat_name} | {algo_name}] FAILED: {e}")
