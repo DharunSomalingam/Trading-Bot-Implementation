@@ -42,11 +42,46 @@ class MACDCrossover(BaseStrategy):
 
         return np.where(macd_line>signal_line,1,-1)
 
-#14D
-class WMACrossover(BaseStrategy):
+#7D
+class WMACrossover7D(BaseStrategy):
     """
-    14D blended WMA crossover strategy.
-    
+    Optimises only the HIGH (fast) signal as a weighted blend:
+        HIGH = (w1·SMA(d1) + w2·LMA(d2) + w3·EMA(d3, alpha)) / (w1+w2+w3)
+
+    LOW (slow) signal is fixed: SMA(200)
+    — as per spec page 13, 7-dimensional vector [w1..w3, d1..d3, alpha]
+
+    params = [w1, w2, w3, d1, d2, d3, alpha]
+    """
+    def generate(self, price, params):
+        # ── Unpack 7 params ─────────────────────────────────
+        w1, w2, w3 = params[0], params[1], params[2]
+        d1 = int(max(5, round(params[3])))
+        d2 = int(max(5, round(params[4])))
+        d3 = int(max(5, round(params[5])))
+        alpha = float(params[6])
+
+        # ── HIGH signal: blended WMA ─────────────────────────
+        sma_h = Indicators.sma(price, d1)
+        lma_h = Indicators.lma(price, d2)
+        ema_h = Indicators.ema(price, d3, alpha)
+
+        min_len = min(len(sma_h), len(lma_h), len(ema_h))
+        sma_h = sma_h[-min_len:]
+        lma_h = lma_h[-min_len:]
+        ema_h = ema_h[-min_len:]
+
+        total_w = w1 + w2 + w3 + 1e-6
+        high = (w1*sma_h + w2*lma_h + w3*ema_h) / total_w
+
+        # ── LOW signal: fixed SMA(200) ───────────────────────
+        low = Indicators.sma(price, 200)[-min_len:]
+
+        return np.where(high > low, 1, -1)
+
+#14D
+class WMACrossover14D(BaseStrategy):
+    """    
     params = [w1_h, w2_h, w3_h, d1_h, d2_h, d3_h, alpha_h,   ← HIGH signal (7)
               w1_l, w2_l, w3_l, d1_l, d2_l, d3_l, alpha_l]   ← LOW  signal (7)
 

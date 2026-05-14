@@ -14,11 +14,11 @@ ALGORITHMS = {
 }
 
 STRATEGIES = {
-    'SMA': {
+    '2D_SMA': {
         'cls':    strategies.SMACrossover,
         'config': {
             "pop_size":  30,
-            "max_iter":  50,
+            "max_iter":  100,
             "dim":       2,
             "bounds":    [(5, 50), (51, 200)],
             "max_time":  120,
@@ -27,11 +27,11 @@ STRATEGIES = {
         },
         'diagnostics': [[10, 50], [15, 100], [20, 150], [30, 180]],
     },
-    'MACD': {
+    '3D_MACD': {
         'cls':    strategies.MACDCrossover,
         'config': {
             "pop_size":  30,
-            "max_iter":  50,
+            "max_iter":  100,
             "dim":       3,
             "bounds":    [(5, 30), (20, 60), (5, 20)],
             "max_time":  120,
@@ -40,22 +40,46 @@ STRATEGIES = {
         },
         'diagnostics': [[12, 26, 9], [8, 21, 5], [5, 20, 7]],
     },
-        'WMA': {                              
-        'cls':    strategies.WMACrossover,
+    '7D_WMA': {
+        'cls':    strategies.WMACrossover7D,
         'config': {
-            "pop_size":  50,
-            "max_iter":  200,
+            "pop_size":  30,
+            "max_iter":  100,
+            "dim":       7,
+            "bounds":    [
+                (0, 1),         # w1
+                (0, 1),         # w2
+                (0, 1),         # w3
+                (5, 200),       # d1  SMA window
+                (5, 200),       # d2  LMA window
+                (5, 200),       # d3  EMA window
+                (0.01, 0.99),   # alpha
+            ],
+            "max_time":  120,
+            "patience":  15,
+            "min_delta": 1.0,
+        },
+        'diagnostics': [
+            [0.5, 0.3, 0.2, 20, 15, 10, 0.3],
+            [0.3, 0.4, 0.3, 30, 25, 20, 0.5],
+        ],
+    },
+    '14D_WMA': {                              
+        'cls':    strategies.WMACrossover14D,
+        'config': {
+            "pop_size":  30,
+            "max_iter":  100,
             "dim":       14,
             "bounds":    [
                 (0, 1), (0, 1), (0, 1),       # weights HIGH
-                (5, 200), (5, 200), (5, 200), # windows HIGH
+                (5, 100), (5, 100), (5, 100), # windows HIGH
                 (0.01, 0.99),                  # alpha HIGH
                 (0, 1), (0, 1), (0, 1),       # weights LOW
-                (5, 200), (5, 200), (5, 200), # windows LOW
+                (5, 100), (5, 100), (5, 100), # windows LOW
                 (0.01, 0.99),                  # alpha LOW
             ],
-            "max_time":  300,
-            "patience":  30,
+            "max_time":  120,
+            "patience":  15,
             "min_delta": 1.0,
         },
         'diagnostics': [
@@ -149,8 +173,17 @@ def print_summary(results):
     print(f"{'Strategy':<10} {'Algorithm':<8} {'Train':>12} {'Test':>12}")
     print("-" * 46)
 
+
+    i = 0
+
     for (strat, algo), (train_result, test_result) in sorted(results.items()):
-        print(f"{strat:<10} {algo:<8} ${train_result:>10.2f} ${test_result:>10.2f}")
+            print(f"{strat:<10} {algo:<8} ${train_result:>10.2f} ${test_result:>10.2f}")
+            
+            i += 1
+            
+            if i == 3:
+                print("-" * 46)
+                i = 0
 
 
 
@@ -237,10 +270,10 @@ if __name__ == "__main__":
 
                 results[(strat_name, algo_name)] = (bot_train.evaluate(best_params), test_result)
 
-                visualisation.visualise_results(
-                    prices_train, bot_train, best_params, convergence,
-                    f"{strat_name}_{algo_name}"
-                )
+                #visualisation.visualise_results(
+                #    prices_train, bot_train, best_params, convergence,
+                #    f"{strat_name}_{algo_name}"
+                #)
 
             except Exception as e:
                 print(f"\n[{strat_name} | {algo_name}] FAILED: {e}")
