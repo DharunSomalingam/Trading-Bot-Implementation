@@ -4,29 +4,17 @@ import argparse
 from trading_system import trading_bot
 from trading_strategies import strategies
 from visualisations import visualisation
-from optimisers import ga, pso, de
+from optimisers import ga, pso, de, abc
 
 
 ALGORITHMS = {
     'PSO': pso.PSO,
     'GA':  ga.GA,
     'DE':  de.DE,
+    'ABC':abc.ABC
 }
 
 STRATEGIES = {
-    '2D_SMA': {
-        'cls':    strategies.SMACrossover,
-        'config': {
-            "pop_size":  30,
-            "max_iter":  100,
-            "dim":       2,
-            "bounds":    [(5, 50), (51, 200)],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
-        },
-        'diagnostics': [[10, 50], [15, 100], [20, 150], [30, 180]],
-    },
     '3D_MACD': {
         'cls':    strategies.MACDCrossover,
         'config': {
@@ -39,53 +27,6 @@ STRATEGIES = {
             "min_delta": 1.0,
         },
         'diagnostics': [[12, 26, 9], [8, 21, 5], [5, 20, 7]],
-    },
-    '7D_WMA': {
-        'cls':    strategies.WMACrossover7D,
-        'config': {
-            "pop_size":  30,
-            "max_iter":  100,
-            "dim":       7,
-            "bounds":    [
-                (0, 1),         # w1
-                (0, 1),         # w2
-                (0, 1),         # w3
-                (5, 200),       # d1  SMA window
-                (5, 200),       # d2  LMA window
-                (5, 200),       # d3  EMA window
-                (0.01, 0.99),   # alpha
-            ],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
-        },
-        'diagnostics': [
-            [0.5, 0.3, 0.2, 20, 15, 10, 0.3],
-            [0.3, 0.4, 0.3, 30, 25, 20, 0.5],
-        ],
-    },
-    '14D_WMA': {                              
-        'cls':    strategies.WMACrossover14D,
-        'config': {
-            "pop_size":  30,
-            "max_iter":  100,
-            "dim":       14,
-            "bounds":    [
-                (0, 1), (0, 1), (0, 1),       # weights HIGH
-                (5, 100), (5, 100), (5, 100), # windows HIGH
-                (0.01, 0.99),                  # alpha HIGH
-                (0, 1), (0, 1), (0, 1),       # weights LOW
-                (5, 100), (5, 100), (5, 100), # windows LOW
-                (0.01, 0.99),                  # alpha LOW
-            ],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
-        },
-        'diagnostics': [
-            [0.5, 0.3, 0.2, 20, 10, 15, 0.3,
-             0.4, 0.4, 0.2, 50, 40, 60, 0.1],
-        ],
     },
 }
 
@@ -193,7 +134,7 @@ def print_summary(results):
         print(f"  {strat:<12} {algo:<8} {scores}")
         i += 1
             
-        if i == 3:
+        if i == 4:
             print("-" * 46)
             i = 0
 
@@ -261,7 +202,7 @@ if __name__ == "__main__":
     if not args.no_diagnostics:
         run_diagnostics(prices_train, args.strategies)
 
-    SEEDS = [42]
+    SEEDS = [42,123,500]
 
     results = {}
     

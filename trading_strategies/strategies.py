@@ -43,21 +43,17 @@ class MACDCrossover(BaseStrategy):
         macd_line  = macd_line[-min_len:]
         signal_line = signal_line[-min_len:]
 
-        # ── Generate crossover signal ──────────────────────────
-        # Start neutral
         signals = np.zeros(min_len, dtype=int)
 
-        # Detect actual crossovers
         above = macd_line > signal_line
 
         for i in range(1, min_len):
             if above[i] and not above[i-1]:
-                signals[i] = 1      # crossed above → buy
+                signals[i] = 1      
             elif not above[i] and above[i-1]:
-                signals[i] = -1     # crossed below → sell
+                signals[i] = -1     
 
-        # ── Hold position between crossovers ───────────────────
-        position = -1   # start neutral/short
+        position = -1
         result   = np.zeros(min_len, dtype=int)
 
         for i in range(min_len):
@@ -67,7 +63,6 @@ class MACDCrossover(BaseStrategy):
                 position = -1
             result[i] = position
 
-        # Pad to match original price length
         full_signal = np.full(len(price), result[0])
         full_signal[-min_len:] = result
 
