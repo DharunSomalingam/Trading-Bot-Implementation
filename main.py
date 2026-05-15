@@ -23,9 +23,9 @@ STRATEGIES = {
             "max_iter":  100,
             "dim":       2,
             "bounds":    [(5, 50), (51, 200)],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
         },
         'diagnostics': [[10, 50], [15, 100], [20, 150], [30, 180]],
     },
@@ -36,9 +36,9 @@ STRATEGIES = {
             "max_iter":  100,
             "dim":       3,
             "bounds":    [(5, 50), (10, 200), (5, 50)],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
         },
         'diagnostics': [[12, 26, 9], [8, 21, 5], [5, 20, 7]],
     },
@@ -57,9 +57,9 @@ STRATEGIES = {
                 (5, 200),       # d3  EMA window
                 (0.01, 0.99),   # alpha
             ],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
         },
         'diagnostics': [
             [0.5, 0.3, 0.2, 20, 15, 10, 0.3],
@@ -80,9 +80,9 @@ STRATEGIES = {
                 (5, 100), (5, 100), (5, 100), # windows LOW
                 (0.01, 0.99),                  # alpha LOW
             ],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
         },
         'diagnostics': [
             [0.5, 0.3, 0.2, 20, 10, 15, 0.3,
@@ -311,11 +311,11 @@ if __name__ == "__main__":
                     'test_all':   test_scores,
                 }
 
-            if best_params is not None:
-               visualisation.visualise_results(
-                    prices_train, bot_train, best_params,
-                    convergence, f"{strat_name}_{algo_name}"
-                )
+            #if best_params is not None:
+            #   visualisation.visualise_results(
+            #        prices_train, bot_train, best_params,
+            #        convergence, f"{strat_name}_{algo_name}"
+            #    )
 
     print_summary(results)
 
