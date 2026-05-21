@@ -318,14 +318,230 @@ def plot_algo_same_dimension(results, strategies, algorithms):
     _save(fig, 'plot5_algo_same_dimension.png')
 
 # ════════════════════════════════════════════════════════════════════════
+# Plot 6 — Algorithm comparison boxplot
+# ════════════════════════════════════════════════════════════════════════
+def plot_boxplot(results):
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    strategies = ["2D_SMA", "3D_MACD", "7D_WMA", "14D_WMA"]
+    algorithms = ["GA", "DE", "PSO", "ABC"]
+
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    axes = axes.flatten()
+
+    colours = {
+        "GA":  "#2196F3",
+        "DE":  "#FF9800",
+        "PSO": "#4CAF50",
+        "ABC": "#9C27B0"
+    }
+
+    for i, strat in enumerate(strategies):
+
+        ax = axes[i]
+
+        data = []
+
+        for algo in algorithms:
+            scores = []
+
+            for (s, a), r in results.items():
+                if s == strat and a == algo:
+                    scores.extend(r["test_all"])
+
+            data.append(scores)
+
+        positions = np.arange(len(algorithms))
+
+        bp = ax.boxplot(
+            data,
+            positions=positions,
+            widths=0.6,
+            patch_artist=True,
+            showfliers=False
+        )
+
+        # colour each algorithm box
+        for patch, algo in zip(bp["boxes"], algorithms):
+            patch.set_facecolor(colours[algo])
+            patch.set_alpha(0.8)
+
+        ax.set_title(strat, fontsize=12, fontweight='bold')
+        ax.set_xticks(positions)
+        ax.set_xticklabels(algorithms)
+        ax.set_ylabel("Test Profit ($)")
+        ax.grid(True, axis='y', alpha=0.3)
+
+    fig.suptitle("Algorithm Comparison per Strategy (Test Performance)", fontsize=14, fontweight='bold')
+
+    fig.tight_layout()
+    _save(fig, "plot6_strategy_algo_boxplot.png")
+
+# ════════════════════════════════════════════════════════════════════════
+# Plot 7 — SMA parameter sensitivity heatmap
+# ════════════════════════════════════════════════════════════════════════
+def plot_sma_heatmap(prices, bot):
+
+    short_range = range(5, 51)
+    long_range = range(51, 201)
+
+    heatmap = np.zeros(
+        (len(short_range), len(long_range))
+    )
+
+    for i, short_w in enumerate(short_range):
+
+        for j, long_w in enumerate(long_range):
+
+            score = bot.evaluate([short_w, long_w])
+
+            if score is None:
+                score = np.nan
+
+            heatmap[i, j] = score
+
+    fig, ax = plt.subplots(figsize=(12, 8))
+
+    contour = ax.contourf(
+        heatmap,
+        levels=30,
+        cmap='viridis'
+    )
+
+    cbar = fig.colorbar(contour)
+
+    cbar.set_label("Profit ($)")
+
+    ax.set_title(
+        "SMA Parameter Sensitivity Heatmap",
+        fontsize=14,
+        fontweight='bold'
+    )
+
+    ax.set_xlabel("Long SMA Window", fontsize=11)
+
+    ax.set_ylabel("Short SMA Window", fontsize=11)
+
+    ax.set_xticks(
+        np.arange(0, len(long_range), 20)
+    )
+
+    ax.set_xticklabels(
+        list(long_range)[::20]
+    )
+
+    ax.set_yticks(
+        np.arange(0, len(short_range), 5)
+    )
+
+    ax.set_yticklabels(
+        list(short_range)[::5]
+    )
+
+    fig.tight_layout()
+
+    _save(fig, 'plot8_sma_heatmap.png')
+# ════════════════════════════════════════════════════════════════════════
+# Plot 8 — Risk vs Return scatter plot
+# ════════════════════════════════════════════════════════════════════════
+def plot_risk_return(results):
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    ax.set_title(
+        "Risk vs Return",
+        fontsize=14,
+        fontweight='bold'
+    )
+
+    for (strategy, algo), r in results.items():
+
+        train_returns = np.array(r['train_all'])
+
+        mean_return = np.mean(train_returns)
+
+        risk = np.std(train_returns)
+
+        colour = ALGO_COLOURS.get(algo, 'gray')
+
+        ax.scatter(
+            risk,
+            mean_return,
+            s=120,
+            color=colour,
+            alpha=0.85
+        )
+
+        ax.text(
+            risk,
+            mean_return,
+            f"{strategy}\n{algo}",
+            fontsize=8
+        )
+
+    ax.set_xlabel(
+        "Risk (Std Dev)",
+        fontsize=11
+    )
+
+    ax.set_ylabel(
+        "Mean Return ($)",
+        fontsize=11
+    )
+
+    ax.yaxis.set_major_formatter(
+        plt.FuncFormatter(lambda x, _: f'${x:,.0f}')
+    )
+
+    ax.grid(True, alpha=0.3)
+
+    fig.tight_layout()
+
+    _save(fig, 'plot9_risk_return.png')
+
+# ════════════════════════════════════════════════════════════════════════
+# Plot 9 — Train/Test Dataset Overview
+# ════════════════════════════════════════════════════════════════════════
+def plot_train_test_dataset(prices_train, prices_test):
+
+    prices_train = np.array(prices_train).flatten()
+    prices_test  = np.array(prices_test).flatten()
+
+    fig, ax = plt.subplots(figsize=(12, 5))
+
+    train_len = len(prices_train)
+
+    full_series = np.concatenate([prices_train, prices_test])
+
+    ax.plot(full_series, color="black", linewidth=1.5, label="Price")
+
+    ax.axvline(train_len, color="red", linestyle="--", linewidth=2, label="Train/Test Split")
+
+    ax.axvspan(0, train_len, alpha=0.1, color="green", label="Train")
+    ax.axvspan(train_len, len(full_series), alpha=0.1, color="blue", label="Test")
+
+    ax.set_title("Dataset Overview: Train vs Test", fontsize=14, fontweight="bold")
+    ax.set_xlabel("Time Index")
+    ax.set_ylabel("Price")
+
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+
+    fig.tight_layout()
+    _save(fig, "plot10_dataset_overview.png")
+# ════════════════════════════════════════════════════════════════════════
 # Master function 
 # ════════════════════════════════════════════════════════════════════════
-def generate_all_plots(results, convergence_data=None):
+def generate_all_plots(results, prices_train, prices_test, convergence_data=None):
     """
     Call after the main experiment loop.
 
     Args:
         results:          dict from main.py results{}
+        prices_train:     numpy array of training prices
+        prices_test:      numpy array of test prices
         convergence_data: dict {(strat, algo, seed): [fitness per iter]}
                           pass None to skip convergence plot
     """
@@ -350,4 +566,22 @@ def generate_all_plots(results, convergence_data=None):
     print("  Plot 5: Algorithm comparison same dimension...")
     plot_algo_same_dimension(results, strategies, algorithms)
 
+    print("  Plot 6: Algorithm Boxplot...")
+    plot_boxplot(results)
+
+    print("  Plot 7: SMA Heatmap...")
+    from trading_system import trading_bot
+    from trading_strategies import strategies as strat_mod
+
+    sma_bot = trading_bot.TradingBot(
+        prices_train,
+        strat_mod.SMACrossover()
+    )
+
+    plot_sma_heatmap(prices_train, sma_bot)
+
+    print("  Plot 8: Risk vs Return...")
+    plot_risk_return(results)
+    print("  Plot 9: Train/Test Dataset Overview...")
+    plot_train_test_dataset(prices_train, prices_test)
     print("\nAll plots saved to visualisations/")

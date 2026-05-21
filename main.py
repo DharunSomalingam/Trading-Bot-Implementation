@@ -273,7 +273,6 @@ if __name__ == "__main__":
         for algo_name in args.algorithms:
             train_scores = []
             test_scores  = []
-
             for seed in SEEDS:
                 try:
                     print(f"\n[{strat_name} | {algo_name} | seed={seed}]")
@@ -286,6 +285,7 @@ if __name__ == "__main__":
                         continue
 
                     train_score = convergence[-1]
+                    detailed_results = bot_train.backtest_detailed(best_params)
                     bot_test    = trading_bot.TradingBot(
                         prices_test, STRATEGIES[strat_name]['cls']()
                     )
@@ -293,7 +293,6 @@ if __name__ == "__main__":
 
                     train_scores.append(train_score)
                     test_scores.append(test_score)
-
                     print(f"  Seed {seed}: Train=${train_score:.2f}, Test=${test_score:.2f}")
                     all_convergence_data[(strat_name, algo_name, seed)] = convergence
 
@@ -309,6 +308,10 @@ if __name__ == "__main__":
                     'test_std':   np.std(test_scores),
                     'train_all':  train_scores,
                     'test_all':   test_scores,
+
+                    'best_params': best_params,
+                    'last_bot': bot_train,
+                    'last_convergence': convergence,
                 }
 
             #if best_params is not None:
@@ -320,6 +323,6 @@ if __name__ == "__main__":
     print_summary(results)
 
     try:
-        comparison_plots.generate_all_plots(results, all_convergence_data)
+        comparison_plots.generate_all_plots(results, prices_train, prices_test, all_convergence_data)
     except Exception as e:
         print(f"\nWarning: Could not generate comparison plots. Error: {e}")
