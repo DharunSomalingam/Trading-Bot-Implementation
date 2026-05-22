@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import os
+import pandas as pd
 
 ALGO_COLOURS = {
     'GA':  '#2196F3',   # blue
@@ -509,21 +510,37 @@ def plot_train_test_dataset(prices_train, prices_test):
     prices_train = np.array(prices_train).flatten()
     prices_test  = np.array(prices_test).flatten()
 
-    fig, ax = plt.subplots(figsize=(12, 5))
-
-    train_len = len(prices_train)
-
     full_series = np.concatenate([prices_train, prices_test])
 
-    ax.plot(full_series, color="black", linewidth=1.5, label="Price")
+    fig, ax = plt.subplots(figsize=(12, 5))
 
-    ax.axvline(train_len, color="red", linestyle="--", linewidth=2, label="Train/Test Split")
+    # 🔥 reconstruct time axis using known split date
+    split_date = pd.Timestamp("2020-01-01")
 
-    ax.axvspan(0, train_len, alpha=0.1, color="green", label="Train")
-    ax.axvspan(train_len, len(full_series), alpha=0.1, color="blue", label="Test")
+    train_dates = pd.date_range(
+        end=split_date - pd.Timedelta(days=1),
+        periods=len(prices_train),
+        freq="D"
+    )
+
+    test_dates = pd.date_range(
+        start=split_date,
+        periods=len(prices_test),
+        freq="D"
+    )
+
+    full_dates = train_dates.append(test_dates)
+
+    # Plot
+    ax.plot(full_dates, full_series, color="black", linewidth=1.5, label="Price")
+
+    ax.axvline(split_date, color="red", linestyle="--", linewidth=2, label="Train/Test Split")
+
+    ax.axvspan(full_dates[0], split_date, alpha=0.1, color="green", label="Train")
+    ax.axvspan(split_date, full_dates[-1], alpha=0.1, color="blue", label="Test")
 
     ax.set_title("Dataset Overview: Train vs Test", fontsize=14, fontweight="bold")
-    ax.set_xlabel("Time Index")
+    ax.set_xlabel("Year")
     ax.set_ylabel("Price")
 
     ax.legend()
@@ -531,6 +548,65 @@ def plot_train_test_dataset(prices_train, prices_test):
 
     fig.tight_layout()
     _save(fig, "plot10_dataset_overview.png")
+# ════════════════════════════════════════════════════════════════════════
+# Plot 11 — Strategy Dimensionality Visualisation
+# ════════════════════════════════════════════════════════════════════════
+def plot_strategy_dimensions():
+
+    from mpl_toolkits.mplot3d import Axes3D
+
+    strategies = ["2D_SMA", "3D_MACD", "7D_WMA", "14D_WMA"]
+    dimensions = [2, 3, 7, 14]
+
+    # fake coordinates purely for visual separation
+    x = [1, 2, 3, 4]
+    y = [1, 2, 1, 2]
+    z = dimensions
+
+    sizes = [d * 120 for d in dimensions]
+
+    colours = [
+        "#E91E63",
+        "#9C27B0",
+        "#00BCD4",
+        "#FF5722"
+    ]
+
+    fig = plt.figure(figsize=(10, 7))
+    ax = fig.add_subplot(111, projection='3d')
+
+    scatter = ax.scatter(
+        x, y, z,
+        s=sizes,
+        c=colours,
+        alpha=0.85
+    )
+
+    for i, strat in enumerate(strategies):
+        ax.text(
+            x[i],
+            y[i],
+            z[i] + 0.5,
+            f"{strat}\n{dimensions[i]}D",
+            fontsize=10,
+            ha='center'
+        )
+
+    ax.set_title(
+        "Strategy Search Space Complexity",
+        fontsize=14,
+        fontweight='bold'
+    )
+
+    ax.set_xlabel("Strategy Group")
+    ax.set_ylabel("Parameter Structure")
+    ax.set_zlabel("Dimensions")
+
+    ax.set_zticks(dimensions)
+
+    fig.tight_layout()
+
+    _save(fig, "plot11_strategy_dimensions.png")
 # ════════════════════════════════════════════════════════════════════════
 # Master function 
 # ════════════════════════════════════════════════════════════════════════
@@ -584,4 +660,6 @@ def generate_all_plots(results, prices_train, prices_test, convergence_data=None
     plot_risk_return(results)
     print("  Plot 9: Train/Test Dataset Overview...")
     plot_train_test_dataset(prices_train, prices_test)
+    # print("  Plot 10: Strategy Complexity Landscape...")
+    # plot_strategy_landscape(results)
     print("\nAll plots saved to visualisations/")
