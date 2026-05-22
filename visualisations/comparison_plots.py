@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import os
 import pandas as pd
+# from mpl_toolkits.mplot3d import Axes3D
+
 
 ALGO_COLOURS = {
     'GA':  '#2196F3',   # blue
@@ -514,7 +516,6 @@ def plot_train_test_dataset(prices_train, prices_test):
 
     fig, ax = plt.subplots(figsize=(12, 5))
 
-    # 🔥 reconstruct time axis using known split date
     split_date = pd.Timestamp("2020-01-01")
 
     train_dates = pd.date_range(
@@ -548,65 +549,104 @@ def plot_train_test_dataset(prices_train, prices_test):
 
     fig.tight_layout()
     _save(fig, "plot10_dataset_overview.png")
+
 # ════════════════════════════════════════════════════════════════════════
-# Plot 11 — Strategy Dimensionality Visualisation
+# Plot 10 — Violin plots (2x2 grid)
+# 4 subplots, one per strategy
+# Each subplot has 4 violins, one per algorithm
 # ════════════════════════════════════════════════════════════════════════
-def plot_strategy_dimensions():
+def plot_violin(results, strategies, algorithms):
 
-    from mpl_toolkits.mplot3d import Axes3D
+    n_strats = len(strategies)
+    cols = 2
+    rows = (n_strats + 1) // 2
 
-    strategies = ["2D_SMA", "3D_MACD", "7D_WMA", "14D_WMA"]
-    dimensions = [2, 3, 7, 14]
+    fig, axes = plt.subplots(rows, cols, figsize=(11, 4.5 * rows), sharey=False)
+    axes = axes.flatten()
 
-    # fake coordinates purely for visual separation
-    x = [1, 2, 3, 4]
-    y = [1, 2, 1, 2]
-    z = dimensions
-
-    sizes = [d * 120 for d in dimensions]
-
-    colours = [
-        "#E91E63",
-        "#9C27B0",
-        "#00BCD4",
-        "#FF5722"
-    ]
-
-    fig = plt.figure(figsize=(10, 7))
-    ax = fig.add_subplot(111, projection='3d')
-
-    scatter = ax.scatter(
-        x, y, z,
-        s=sizes,
-        c=colours,
-        alpha=0.85
+    fig.suptitle(
+        "Test Performance Distribution by Algorithm & Strategy",
+        fontsize=14, fontweight='bold', y=1.02
     )
 
     for i, strat in enumerate(strategies):
-        ax.text(
-            x[i],
-            y[i],
-            z[i] + 0.5,
-            f"{strat}\n{dimensions[i]}D",
-            fontsize=10,
-            ha='center'
+        ax = axes[i]
+        ax.set_title(f"{strat} ({DIMS[strat]}D)", fontsize=12, fontweight='bold')
+        ax.set_ylabel("Test Profit ($)", fontsize=11)
+        ax.set_xlabel("Algorithm", fontsize=11)
+
+        data      = []
+        positions = []
+        colours   = []
+        labels    = []
+
+        for j, algo in enumerate(algorithms):
+            key    = (strat, algo)
+            scores = results.get(key, {}).get('test_all', [])
+
+            if len(scores) < 2:
+                continue
+
+            data.append(scores)
+            positions.append(j)
+            colours.append(ALGO_COLOURS.get(algo, 'gray'))
+            labels.append(algo)
+
+        if not data:
+            ax.set_axis_off()
+            continue
+
+        parts = ax.violinplot(
+            data,
+            positions=positions,
+            widths=0.6,
+            showmeans=False,
+            showmedians=False,
+            showextrema=False,
         )
 
-    ax.set_title(
-        "Strategy Search Space Complexity",
-        fontsize=14,
-        fontweight='bold'
-    )
+        for k, pc in enumerate(parts['bodies']):
+            pc.set_facecolor(colours[k])
+            pc.set_edgecolor(colours[k])
+            pc.set_alpha(0.45)
 
-    ax.set_xlabel("Strategy Group")
-    ax.set_ylabel("Parameter Structure")
-    ax.set_zlabel("Dimensions")
+        for k, (d, pos) in enumerate(zip(data, positions)):
+            q1, med, q3 = np.percentile(d, [25, 50, 75])
 
-    ax.set_zticks(dimensions)
+            # IQR bar
+            ax.vlines(pos, q1, q3, color=colours[k], linewidth=3, zorder=3)
+
+            # median dot (white fill, coloured edge)
+            ax.scatter(pos, med,
+                       color='white', edgecolors=colours[k],
+                       s=40, zorder=4, linewidths=1.5)
+
+            # mean diamond
+            ax.scatter(pos, np.mean(d),
+                       color=colours[k], marker='D',
+                       s=25, zorder=4, alpha=0.9)
+
+        ax.set_xticks(positions)
+        ax.set_xticklabels(labels, fontsize=11)
+        ax.yaxis.set_major_formatter(
+            plt.FuncFormatter(lambda v, _: f'${v:,.0f}')
+        )
+        ax.grid(True, axis='y', alpha=0.3)
+
+        n_seeds = len(data[0]) if data else 0
+        ax.text(
+            0.98, 0.02,
+            f"n={n_seeds} seeds  |  ● median  ◆ mean",
+            transform=ax.transAxes,
+            fontsize=8, color='gray',
+            ha='right', va='bottom'
+        )
+
+    for j in range(n_strats, len(axes)):
+        fig.delaxes(axes[j])
 
     fig.tight_layout()
-
-    _save(fig, "plot11_strategy_dimensions.png")
+    _save(fig, 'plot11_violin_test_performance.png')
 # ════════════════════════════════════════════════════════════════════════
 # Master function 
 # ════════════════════════════════════════════════════════════════════════
@@ -660,6 +700,7 @@ def generate_all_plots(results, prices_train, prices_test, convergence_data=None
     plot_risk_return(results)
     print("  Plot 9: Train/Test Dataset Overview...")
     plot_train_test_dataset(prices_train, prices_test)
-    # print("  Plot 10: Strategy Complexity Landscape...")
-    # plot_strategy_landscape(results)
+ 
+    print("  Plot 10: Violin plots...")
+    plot_violin(results, strategies, algorithms)
     print("\nAll plots saved to visualisations/")

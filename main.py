@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 import pandas as pd
 import argparse
@@ -91,7 +93,6 @@ STRATEGIES = {
     },
 }
 
-
 def load_data(filepath):
     try:
         df = pd.read_csv(filepath)
@@ -101,13 +102,13 @@ def load_data(filepath):
         train_mask   = df['date'] < '2020-01-01'
         prices_train = df['close'][train_mask].values
         prices_test  = df['close'][~train_mask].values
-
+        print(f"Loaded {len(prices_train)} training and {len(prices_test)} testing data points.")
+        
         return prices_train, prices_test
 
     except Exception as e:
         print(f"Error loading data: {e}")
         return None, None
-
 
 def run_diagnostics(prices_train, selected_strategies):
     print(f"\n{'='*60}")
@@ -128,10 +129,10 @@ def run_diagnostics(prices_train, selected_strategies):
 
 
 def _classify(result):
-    if result < 10:   return "Critical Failure (ur course)"
-    if result < 500:  return "Severe damage (ur WAM)"
-    if result < 900:  return "Loss (Hair Loss)"
-    if result > 1100: return "PROFIT [not in ur life]"
+    if result < 10:   return "Critical Failure"
+    if result < 500:  return "Severe damage"
+    if result < 900:  return "Loss"
+    if result > 1100: return "PROFIT"
     return "NEUTRAL"
 
 
@@ -265,6 +266,8 @@ if __name__ == "__main__":
         run_diagnostics(prices_train, args.strategies)
 
     SEEDS = [42,123,500]
+    # random.seed(0)
+    # SEEDS = random.sample(range(1, 10001), 30)
 
     results = {}
     all_convergence_data = {}
@@ -319,7 +322,7 @@ if __name__ == "__main__":
             #        prices_train, bot_train, best_params,
             #        convergence, f"{strat_name}_{algo_name}"
             #    )
-
+    
     print_summary(results)
 
     try:
