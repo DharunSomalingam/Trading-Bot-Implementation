@@ -17,6 +17,7 @@ STRAT_COLOURS = {
     '3D_MACD': '#9C27B0',
     '7D_WMA':  '#00BCD4',
     '14D_WMA': '#FF5722',
+    '21D_WMA': "#0F0401",
 }
 
 DIMS = {
@@ -24,6 +25,7 @@ DIMS = {
     '3D_MACD': 3,
     '7D_WMA':  7,
     '14D_WMA': 14,
+    '21D_WMA': 21
 }
 
 OUTPUT_DIR = 'visualisations/plot/comparisons'
