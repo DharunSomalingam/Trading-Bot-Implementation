@@ -1,88 +1,103 @@
-# Trading-Bot-Implementation
-This project applies nature-inspired optimisation techniques to algorithmic trading. A parameterised strategy using technical indicators (e.g., moving averages) is evaluated on historical Bitcoin OHLCV data, with population-based methods used to optimise parameters through backtesting and comparative analysis
+# AI Trading Bot Optimiser
 
-## Project Overview
-The goal is to design and analyse intelligent trading bots that can automatically tune strategy parameters and improve performance through adaptive optimisation.
+This project implements an AI-driven trading system that uses metaheuristic optimisation algorithms to tune technical trading strategies. It evaluates strategies on historical market data and compares in-sample and out-of-sample performance.
 
----
+## Overview
 
-## Objectives
+The system combines:
+- Trading strategies
+- Optimisation algorithms
+- Backtesting framework
+- Train/test split evaluation
+- Performance visualisation tools
 
-- Explore nature-inspired and population-based optimisation techniques  
-- Apply optimisation methods to trading strategy parameter tuning  
-- Analyse technical indicators for decision-making (buy/sell signals)  
-- Evaluate performance using historical Bitcoin market data  
-- Compare different optimisation approaches  
+The goal is to study how different optimisation methods perform across trading strategies and market conditions.
 
----
+## Features
 
-## Trading Strategy
+- Optimisation algorithms:
+  - Particle Swarm Optimisation (PSO)
+  - Genetic Algorithm (GA)
+  - Differential Evolution (DE)
+  - Artificial Bee Colony (ABC)
 
-The trading bot is based on **technical analysis (TA)** indicators such as:
+- Trading strategies:
+  - 2d_sma – Simple SMA crossover strategy (2D)
+  - 3d_macd – Classic MACD crossover strategy (3D)
+  - 7d_wma – Weighted moving average crossover (7D)
+  - 14d_wma – Extended weighted moving average crossover (14D)
+  - 21d_wma – High-dimensional weighted moving average crossover (21D)
 
-- Simple Moving Average (SMA)  
-- Exponential Moving Average (EMA)  
-- Indicator crossover signals for buy/sell decisions  
+- System capabilities:
+  - Train/test split (pre-2020 vs post-2020)
+  - Diagnostic sanity checks
+  - Iterative optimisation tracking
+  - Convergence analysis
+  - Visualisation of results
 
-The strategy parameters (e.g., window sizes) are optimised using evolutionary search methods rather than manual tuning.
+## Project Structure
 
----
+- main.py – entry point
+- trading_system.py – trading engine and evaluation
+- trading_strategies/ – strategy implementations
+- optimisers/ – GA, PSO, DE, ABC algorithms
+- visualisations/ – plotting and analysis tools
+- data/BTC-Daily.csv – historical dataset
 
-## Optimisation Approach
+## How to Run
 
-Nature-inspired optimisation methods are used to:
+Run full experiment:
+```bash
+python main.py
+```
 
-- Search for optimal trading parameters  
-- Improve profitability and reduce risk  
-- Navigate a high-dimensional, noisy search space  
+Run specific strategies and algorithms:
+```bash
+python main.py --strategies SMA MACD --algorithms PSO GA
+```
 
-These methods operate using populations of candidate solutions that evolve over time toward better performance.
+Skip diagnostics:
+```bash
+python main.py --no-diagnostics
+```
 
----
+## Output
 
-## Data
+- Iteration-by-iteration optimisation logs
+- Best parameter sets
+- Training performance results
+- Out-of-sample test performance
+- Comparison plots
 
-The project uses historical **Bitcoin OHLCV data (Open, High, Low, Close, Volume)**.
+## Methodology
 
-This data is used to:
+- Training data: pre-2020
+- Testing data: post-2020
 
-- Simulate trading decisions  
-- Backtest strategies  
-- Evaluate performance under real market conditions  
+Each algorithm optimises strategy parameters to maximise trading returns.
 
----
+Evaluation metrics:
+- Profitability
+- Stability
+- Convergence behaviour
+- Sensitivity to configuration
 
-##  Methodology
+## Diagnostics
 
-1. Define a parameterised trading strategy  
-2. Encode parameters as optimisation variables  
-3. Use population-based optimisation to search for best parameters  
-4. Backtest strategy on historical data  
-5. Evaluate performance using trading metrics  
+The system runs a diagnostic phase to:
+- Validate strategy behaviour
+- Test predefined parameter sets
+- Detect unstable configurations
 
----
+## Dependencies
 
-##  Phase Breakdown
+```bash
+pip install -r requirements.txt
+```
 
-### Phase 1 – Research
-- Study nature-inspired optimisation algorithms  
-- Conduct literature review  
-- Compare different optimisation approaches  
-- Select suitable algorithms for implementation  
+## Contributors
+- Dharun Somalingam
+- Keerthana Narkunaraja
+- Nandana Vinod
+- Zi Fung Tan
 
-### Phase 2 – Implementation
-- Implement trading bot  
-- Apply optimisation algorithms  
-- Perform backtesting  
-- Compare results and analyse performance  
-
----
-
-##  Expected Outcome
-
-- Understanding of nature-inspired optimisation methods  
-- A working AI-driven trading bot  
-- Comparative analysis of optimisation strategies  
-- Performance evaluation on real financial data  
-
----
