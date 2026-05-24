@@ -5,12 +5,12 @@ import time
 
 class PSO(Optimiser):
 
-    def __init__(self, config, w=0.7, c1=1.5, c2=1.5, seed=42):
+    def __init__(self, config, w=0.5, c1=1.2, c2=1.2, seed=42):
         super().__init__(config)
         self.w = w
         self.c1 = c1
         self.c2 = c2
-        self.rng = np.random.default_rng(seed)
+        self.rng = np.random.default_rng(self.seed)
 
     def fitness(self, bot, params):
         return bot.evaluate(params)

@@ -1,4 +1,5 @@
 # AI Trading Bot Optimiser
+Watch our video here: https://youtu.be/fyE2Hx8xv5c
 
 This project implements an AI-driven trading system that uses metaheuristic optimisation algorithms to tune technical trading strategies. It evaluates strategies on historical market data and compares in-sample and out-of-sample performance.
 
@@ -101,3 +102,10 @@ pip install -r requirements.txt
 - Nandana Vinod
 - Zi Fung Tan
 
+## Acknowledgment
+
+Use of Generative AI
+This project's core implementation, analysis, and findings represent work by our team. Generative AI tools were used selectively as supplementary aids during the development process, specifically for:
+
+  Assistance with debugging technical errors and resolving code-related challenges
+  Clarification of complex programming concepts and exploration of algorithmic approaches

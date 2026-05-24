@@ -1,48 +1,118 @@
+import random
+
 import numpy as np
 import pandas as pd
 import argparse
 from trading_system import trading_bot
 from trading_strategies import strategies
 from visualisations import visualisation
-from optimisers import ga, pso, de
+from optimisers import ga, pso, de, abc
+from visualisations import comparison_plots
 
 
 ALGORITHMS = {
     'PSO': pso.PSO,
     'GA':  ga.GA,
     'DE':  de.DE,
+    'ABC':abc.ABC
 }
 
 STRATEGIES = {
-    'SMA': {
+    '2D_SMA': {
         'cls':    strategies.SMACrossover,
         'config': {
             "pop_size":  30,
-            "max_iter":  50,
+            "max_iter":  100,
             "dim":       2,
             "bounds":    [(5, 50), (51, 200)],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
         },
         'diagnostics': [[10, 50], [15, 100], [20, 150], [30, 180]],
     },
-    'MACD': {
+    '3D_MACD': {
         'cls':    strategies.MACDCrossover,
         'config': {
             "pop_size":  30,
-            "max_iter":  50,
+            "max_iter":  100,
             "dim":       3,
-            "bounds":    [(5, 30), (20, 60), (5, 20)],
-            "max_time":  120,
-            "patience":  15,
-            "min_delta": 1.0,
+            "bounds":    [(5, 50), (10, 200), (5, 50)],
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
         },
         'diagnostics': [[12, 26, 9], [8, 21, 5], [5, 20, 7]],
     },
+    '7D_WMA': {
+        'cls':    strategies.WMACrossover7D,
+        'config': {
+            "pop_size":  30,
+            "max_iter":  100,
+            "dim":       7,
+            "bounds":    [
+                (0, 1),         # w1
+                (0, 1),         # w2
+                (0, 1),         # w3
+                (5, 200),       # d1  SMA window
+                (5, 200),       # d2  LMA window
+                (5, 200),       # d3  EMA window
+                (0.01, 0.99),   # alpha
+            ],
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
+        },
+        'diagnostics': [
+            [0.5, 0.3, 0.2, 20, 15, 10, 0.3],
+            [0.3, 0.4, 0.3, 30, 25, 20, 0.5],
+        ],
+    },
+    '14D_WMA': {                              
+        'cls':    strategies.WMACrossover14D,
+        'config': {
+            "pop_size":  30,
+            "max_iter":  100,
+            "dim":       14,
+            "bounds":    [
+                (0, 1), (0, 1), (0, 1),       # weights HIGH
+                (5, 100), (5, 100), (5, 100), # windows HIGH
+                (0.01, 0.99),                  # alpha HIGH
+                (0, 1), (0, 1), (0, 1),       # weights LOW
+                (5, 100), (5, 100), (5, 100), # windows LOW
+                (0.01, 0.99),                  # alpha LOW
+            ],
+            "max_time":  300,
+            "patience":  100,
+            "min_delta": 0.0,
+        },
+        'diagnostics': [
+            [0.5, 0.3, 0.2, 20, 10, 15, 0.3,
+             0.4, 0.4, 0.2, 50, 40, 60, 0.1],
+        ],
+    },
+    '21D_WMA': {
+    'cls': strategies.WMACrossover21D,
+    'config': {
+        "pop_size":  30,
+        "max_iter":  100,
+        "dim":       21,
+        "bounds":    (
+            [(0, 1)] * 3 + [(5, 100)] * 3 + [(0.01, 0.99)] +  # FAST
+            [(0, 1)] * 3 + [(5, 100)] * 3 + [(0.01, 0.99)] +  # SLOW
+            [(0, 1)] * 3 + [(5, 50)]  * 3 + [(0.01, 0.99)]    # SIGNAL
+        ),
+        "max_time":  120,
+        "patience":  100,
+        "min_delta": 0.0,
+    },
+    'diagnostics': [
+        [0.5, 0.3, 0.2, 20, 15, 10, 0.3,
+         0.3, 0.4, 0.3, 50, 40, 60, 0.1,
+         0.4, 0.3, 0.3, 10,  8, 12, 0.5],
+    ],
+  },
 }
-
-
 
 def load_data(filepath):
     try:
@@ -53,13 +123,13 @@ def load_data(filepath):
         train_mask   = df['date'] < '2020-01-01'
         prices_train = df['close'][train_mask].values
         prices_test  = df['close'][~train_mask].values
-
+        print(f"Loaded {len(prices_train)} training and {len(prices_test)} testing data points.")
+        
         return prices_train, prices_test
 
     except Exception as e:
         print(f"Error loading data: {e}")
         return None, None
-
 
 def run_diagnostics(prices_train, selected_strategies):
     print(f"\n{'='*60}")
@@ -80,22 +150,22 @@ def run_diagnostics(prices_train, selected_strategies):
 
 
 def _classify(result):
-    if result < 10:   return "Critical Failure (ur course)"
-    if result < 500:  return "Severe damage (ur WAM)"
-    if result < 900:  return "Loss (Hair Loss)"
-    if result > 1100: return "PROFIT [not in ur life]"
+    if result < 10:   return "Critical Failure"
+    if result < 500:  return "Severe damage"
+    if result < 900:  return "Loss"
+    if result > 1100: return "PROFIT"
     return "NEUTRAL"
 
 
 
-def run_optimization(prices, strategy_name, algo_name):
+def run_optimization(prices, strategy_name, algo_name, seed = 42):
     print(f"\n{'='*60}")
     print(f"  {algo_name} x {strategy_name}")
     print(f"{'='*60}\n")
 
     entry     = STRATEGIES[strategy_name]
     strategy  = entry['cls']()
-    config    = entry['config']
+    config    = {**entry['config'], 'seed': seed}
     bot       = trading_bot.TradingBot(prices, strategy)
     optimizer = ALGORITHMS[algo_name](config)
 
@@ -118,17 +188,39 @@ def run_optimization(prices, strategy_name, algo_name):
     return best_params, convergence, bot
 
 
-
 def print_summary(results):
-    print(f"\n{'='*60}")
-    print("RESULTS SUMMARY")
-    print(f"{'='*60}")
-    print(f"{'Strategy':<10} {'Algorithm':<8} {'Train':>12} {'Test':>12}")
-    print("-" * 46)
+    print(f"\n{'='*70}")
+    print("RESULTS SUMMARY (mean ± std over 3 seeds)")
+    print(f"{'='*70}")
+    print(f"  {'Strategy':<12} {'Algorithm':<8} {'Train $':<22} {'Test $'}")
+    print(f"  {'-'*65}")
+    
+    x = 0
 
-    for (strat, algo), (train_result, test_result) in sorted(results.items()):
-        print(f"{strat:<10} {algo:<8} ${train_result:>10.2f} ${test_result:>10.2f}")
+    for (strat, algo), r in sorted(results.items()):
+        train_str = f"${r['train_mean']:>10.2f} ± ${r['train_std']:.2f}"
+        test_str  = f"${r['test_mean']:>10.2f} ± ${r['test_std']:.2f}"
+        print(f"  {strat:<12} {algo:<8} {train_str:<22}  {test_str}")
+        
+        x+=1
 
+        if x == 4:
+            print("-" * 65)
+            x = 0
+
+    print(f"\n  {'Strategy':<12} {'Algorithm':<8} {'All train scores'}")
+    print(f"  {'-'*65}")
+
+    i = 0
+
+    for (strat, algo), r in sorted(results.items()):
+        scores = [f"${s:.0f}" for s in r['train_all']]
+        print(f"  {strat:<12} {algo:<8} {scores}")
+        i += 1
+            
+        if i == 4:
+            print("-" * 65)
+            i = 0
 
 
 def parse_args():
@@ -194,35 +286,67 @@ if __name__ == "__main__":
     if not args.no_diagnostics:
         run_diagnostics(prices_train, args.strategies)
 
-    results = {}
+    SEEDS = [42,123,500]
+    # random.seed(0)
+    # SEEDS = random.sample(range(1, 10001), 30)
 
+    results = {}
+    all_convergence_data = {}
+    
     for strat_name in args.strategies:
         for algo_name in args.algorithms:
+            train_scores = []
+            test_scores  = []
+            for seed in SEEDS:
+                try:
+                    print(f"\n[{strat_name} | {algo_name} | seed={seed}]")
 
-            try:
-                best_params, convergence, bot_train = run_optimization(
-                    prices_train, strat_name, algo_name
-                )
+                    best_params, convergence, bot_train = run_optimization(
+                        prices_train, strat_name, algo_name, seed=seed
+                    )
 
-                if best_params is None:
+                    if best_params is None:
+                        continue
+
+                    train_score = convergence[-1]
+                    detailed_results = bot_train.backtest_detailed(best_params)
+                    bot_test    = trading_bot.TradingBot(
+                        prices_test, STRATEGIES[strat_name]['cls']()
+                    )
+                    test_score = bot_test.evaluate(best_params)
+
+                    train_scores.append(train_score)
+                    test_scores.append(test_score)
+                    print(f"  Seed {seed}: Train=${train_score:.2f}, Test=${test_score:.2f}")
+                    all_convergence_data[(strat_name, algo_name, seed)] = convergence
+
+                except Exception as e:
+                    print(f"  Seed {seed} FAILED: {e}")
                     continue
 
-                bot_test    = trading_bot.TradingBot(prices_test, STRATEGIES[strat_name]['cls']())
-                test_result = bot_test.evaluate(best_params)
+            if train_scores:
+                results[(strat_name, algo_name)] = {
+                    'train_mean': np.mean(train_scores),
+                    'train_std':  np.std(train_scores),
+                    'test_mean':  np.mean(test_scores),
+                    'test_std':   np.std(test_scores),
+                    'train_all':  train_scores,
+                    'test_all':   test_scores,
 
-                print(f"\n[{strat_name} | {algo_name}] Out-of-sample: ${test_result:.2f}")
+                    'best_params': best_params,
+                    'last_bot': bot_train,
+                    'last_convergence': convergence,
+                }
 
-                results[(strat_name, algo_name)] = (bot_train.evaluate(best_params), test_result)
-
-                visualisation.visualise_results(
-                    prices_train, bot_train, best_params, convergence,
-                    f"{strat_name}_{algo_name}"
-                )
-
-            except Exception as e:
-                print(f"\n[{strat_name} | {algo_name}] FAILED: {e}")
-                import traceback
-                traceback.print_exc()
-                continue
-
+            #if best_params is not None:
+            #   visualisation.visualise_results(
+            #        prices_train, bot_train, best_params,
+            #        convergence, f"{strat_name}_{algo_name}"
+            #    )
+    
     print_summary(results)
+
+    try:
+        comparison_plots.generate_all_plots(results, prices_train, prices_test, all_convergence_data)
+    except Exception as e:
+        print(f"\nWarning: Could not generate comparison plots. Error: {e}")
