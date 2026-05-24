@@ -327,9 +327,6 @@ def plot_algo_same_dimension(results, strategies, algorithms):
 # ════════════════════════════════════════════════════════════════════════
 def plot_boxplot(results):
 
-    import numpy as np
-    import matplotlib.pyplot as plt
-
     strategies = ["2D_SMA", "3D_MACD", "7D_WMA", "14D_WMA"]
     algorithms = ["GA", "DE", "PSO", "ABC"]
 
@@ -570,6 +567,7 @@ def plot_violin(results, strategies, algorithms):
         "Test Performance Distribution by Algorithm & Strategy",
         fontsize=14, fontweight='bold', y=1.02
     )
+   
 
     for i, strat in enumerate(strategies):
         ax = axes[i]
@@ -649,6 +647,253 @@ def plot_violin(results, strategies, algorithms):
 
     fig.tight_layout()
     _save(fig, 'plot11_violin_test_performance.png')
+
+def plot_violin_fixed_limits(results, strategies, algorithms):
+
+    n_strats = len(strategies)
+    cols = 2
+    rows = (n_strats + 1) // 2
+
+    fig, axes = plt.subplots(rows, cols, figsize=(11, 4.5 * rows), sharey=True)
+    axes = axes.flatten()
+
+    fig.suptitle(
+        "Test Performance Distribution by Algorithm & Strategy",
+        fontsize=14, fontweight='bold', y=1.02
+    )
+    all_scores = []
+
+    for strat in strategies:
+        for algo in algorithms:
+            key = (strat, algo)
+            scores = results.get(key, {}).get('test_all', [])
+            if len(scores) > 0:
+                all_scores.extend(scores)
+
+    y_min = min(all_scores)
+    y_max = max(all_scores)
+    
+    padding = (y_max - y_min) * 0.05
+    y_limit_lower = y_min - padding
+    y_limit_upper = y_max + padding
+
+    for i, strat in enumerate(strategies):
+        ax = axes[i]
+        ax.set_title(f"{strat} ({DIMS[strat]}D)", fontsize=12, fontweight='bold')
+        ax.set_ylabel("Test Profit ($)", fontsize=11)
+        ax.set_xlabel("Algorithm", fontsize=11)
+
+        data      = []
+        positions = []
+        colours   = []
+        labels    = []
+
+        for j, algo in enumerate(algorithms):
+            key    = (strat, algo)
+            scores = results.get(key, {}).get('test_all', [])
+
+            if len(scores) < 2:
+                continue
+
+            data.append(scores)
+            positions.append(j)
+            colours.append(ALGO_COLOURS.get(algo, 'gray'))
+            labels.append(algo)
+
+        if not data:
+            ax.set_axis_off()
+            continue
+
+        parts = ax.violinplot(
+            data,
+            positions=positions,
+            widths=0.6,
+            showmeans=False,
+            showmedians=False,
+            showextrema=False,
+        )
+
+        for k, pc in enumerate(parts['bodies']):
+            pc.set_facecolor(colours[k])
+            pc.set_edgecolor(colours[k])
+            pc.set_alpha(0.45)
+
+        for k, (d, pos) in enumerate(zip(data, positions)):
+            q1, med, q3 = np.percentile(d, [25, 50, 75])
+
+            # IQR bar
+            ax.vlines(pos, q1, q3, color=colours[k], linewidth=3, zorder=3)
+
+            # median dot (white fill, coloured edge)
+            ax.scatter(pos, med,
+                       color='white', edgecolors=colours[k],
+                       s=40, zorder=4, linewidths=1.5)
+
+            # mean diamond
+            ax.scatter(pos, np.mean(d),
+                       color=colours[k], marker='D',
+                       s=25, zorder=4, alpha=0.9)
+
+        ax.set_xticks(positions)
+        ax.set_xticklabels(labels, fontsize=11)
+        
+        ax.set_ylim(y_limit_lower, y_limit_upper) 
+        
+        ax.yaxis.set_major_formatter(
+            plt.FuncFormatter(lambda v, _: f'${v:,.0f}')
+        )
+        ax.grid(True, axis='y', alpha=0.3)
+
+        n_seeds = len(data[0]) if data else 0
+        ax.text(
+            0.98, 0.02,
+            f"n={n_seeds} seeds  |  ● median  ◆ mean",
+            transform=ax.transAxes,
+            fontsize=8, color='gray',
+            ha='right', va='bottom'
+        )
+
+    for j in range(n_strats, len(axes)):
+        fig.delaxes(axes[j])
+
+    fig.tight_layout()
+    _save(fig, 'plot12_violin_test_performance_fixed_limits.png')
+
+def plot_violin_percentile_scaled(results, strategies, algorithms):
+
+    n_strats = len(strategies)
+    cols = 2
+    rows = (n_strats + 1) // 2
+
+    fig, axes = plt.subplots(
+        rows, cols,
+        figsize=(11, 4.5 * rows),
+        sharey=True
+    )
+    axes = axes.flatten()
+
+    fig.suptitle(
+        "Test Performance Distribution by Algorithm & Strategy",
+        fontsize=14,
+        fontweight='bold',
+        y=1.02
+    )
+
+    all_scores = []
+
+    for strat in strategies:
+        for algo in algorithms:
+            key = (strat, algo)
+            scores = results.get(key, {}).get('test_all', [])
+            if len(scores) > 0:
+                all_scores.extend(scores)
+
+    
+    y_min = np.percentile(all_scores, 2)
+    y_max = np.percentile(all_scores, 98)
+
+    padding = (y_max - y_min) * 0.05
+    y_limit_lower = y_min - padding
+    y_limit_upper = y_max + padding
+
+    
+    for i, strat in enumerate(strategies):
+        ax = axes[i]
+
+        ax.set_title(f"{strat} ({DIMS[strat]}D)", fontsize=12, fontweight='bold')
+        ax.set_ylabel("Test Profit ($)", fontsize=11)
+        ax.set_xlabel("Algorithm", fontsize=11)
+
+        data = []
+        positions = []
+        colours = []
+        labels = []
+
+        for j, algo in enumerate(algorithms):
+            key = (strat, algo)
+            scores = results.get(key, {}).get('test_all', [])
+
+            if len(scores) < 2:
+                continue
+
+            data.append(scores)
+            positions.append(j)
+            colours.append(ALGO_COLOURS.get(algo, 'gray'))
+            labels.append(algo)
+
+        if not data:
+            ax.set_axis_off()
+            continue
+
+        parts = ax.violinplot(
+            data,
+            positions=positions,
+            widths=0.6,
+            showmeans=False,
+            showmedians=False,
+            showextrema=False,
+        )
+
+        for k, pc in enumerate(parts['bodies']):
+            pc.set_facecolor(colours[k])
+            pc.set_edgecolor(colours[k])
+            pc.set_alpha(0.45)
+
+        for k, (d, pos) in enumerate(zip(data, positions)):
+            q1, med, q3 = np.percentile(d, [25, 50, 75])
+
+            # IQR bar
+            ax.vlines(pos, q1, q3, color=colours[k], linewidth=3, zorder=3)
+
+            # median
+            ax.scatter(
+                pos, med,
+                color='white',
+                edgecolors=colours[k],
+                s=40,
+                zorder=4,
+                linewidths=1.5
+            )
+
+            # mean
+            ax.scatter(
+                pos, np.mean(d),
+                color=colours[k],
+                marker='D',
+                s=25,
+                zorder=4,
+                alpha=0.9
+            )
+
+        ax.set_xticks(positions)
+        ax.set_xticklabels(labels, fontsize=11)
+
+       
+        ax.set_ylim(y_limit_lower, y_limit_upper)
+
+        ax.yaxis.set_major_formatter(
+            plt.FuncFormatter(lambda v, _: f'${v:,.0f}')
+        )
+
+        ax.grid(True, axis='y', alpha=0.3)
+
+        n_seeds = len(data[0]) if data else 0
+        ax.text(
+            0.98, 0.02,
+            f"n={n_seeds} seeds  |  ● median  ◆ mean",
+            transform=ax.transAxes,
+            fontsize=8,
+            color='gray',
+            ha='right',
+            va='bottom'
+        )
+
+    # remove unused subplots
+    for j in range(n_strats, len(axes)):
+        fig.delaxes(axes[j])
+
+    fig.tight_layout()
+    _save(fig, 'plot13_violin_test_performance_percentiled_scaled.png')
 # ════════════════════════════════════════════════════════════════════════
 # Master function 
 # ════════════════════════════════════════════════════════════════════════
@@ -705,4 +950,8 @@ def generate_all_plots(results, prices_train, prices_test, convergence_data=None
  
     print("  Plot 10: Violin plots...")
     plot_violin(results, strategies, algorithms)
+    print("  Plot 11: Violin plots with fixed y-limits...")
+    plot_violin_fixed_limits(results, strategies, algorithms)
+    print("  Plot 12: Violin plots with percentile-based y-limits...")
+    plot_violin_percentile_scaled(results, strategies, algorithms)
     print("\nAll plots saved to visualisations/")
